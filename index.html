@@ -1,160 +1,1841 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bigland Construction - Professional Building Services</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 20px;
-            opacity: 0.9;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .section {
-            margin: 50px 0;
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        .section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 32px;
-        }
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .service-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-        .contact-section {
-            background: #667eea;
-            color: white;
-            text-align: center;
-            padding: 40px;
-            border-radius: 8px;
-            margin: 50px 0;
-        }
-        .contact-section h2 {
-            color: white;
-        }
-        .contact-info {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        .contact-info p {
-            margin: 10px 0;
-        }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-        }
-        a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>BigLand · Premium Builders</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ===== ROOT VARIABLES – Gold Theme ===== */
+    :root {
+      --color-bg: #faf8f5;
+      --color-surface: #ffffff;
+      --color-text: #1e1c19;
+      --color-text-muted: #6b6760;
+      --color-accent: #b8953a;
+      --color-accent-soft: #e8dfce;
+      --color-border: #e6e2da;
+      --font-family: 'Inter', sans-serif;
+      --radius: 10px;
+      --radius-full: 60px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-hover: 0 6px 20px rgba(0,0,0,0.05);
+      --transition: 0.25s ease;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.65rem 1.8rem;
+      border-radius: var(--radius-full);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      background: transparent;
+      color: var(--color-text);
+      min-height: 44px;
+      min-width: 44px;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover {
+      background: #a17e2e;
+      border-color: #a17e2e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(184,149,58,0.20);
+    }
+    .btn-outline {
+      border-color: var(--color-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #0b1a2e;
+      border-bottom: 3px solid var(--color-accent);
+      padding: 0 30px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.20);
+    }
+    .header-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .brand .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .brand .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .brand .logo-text span { color: var(--color-accent); }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-menu a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 40px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-menu a:hover {
+      background: rgba(184,149,58,0.12);
+      color: #ffffff;
+    }
+    .nav-menu .btn-cta {
+      background: var(--color-accent);
+      color: #fff;
+      padding: 8px 24px;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(184,149,58,0.30);
+      margin-left: 6px;
+    }
+    .nav-menu .btn-cta:hover {
+      background: #a17e2e;
+      transform: translateY(-2px);
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: #fff;
+      border-radius: 4px;
+      transition: 0.3s ease;
+    }
+    @media (max-width: 820px) {
+      .menu-toggle { display: flex; }
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        background: #0b1a2e;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+        padding: 16px;
+        gap: 4px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.60);
+      }
+      .nav-menu.open { display: flex; }
+      .nav-menu a {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 15px;
+      }
+      .nav-menu .btn-cta {
+        text-align: center;
+        margin-left: 0;
+        margin-top: 4px;
+        justify-content: center;
+      }
+      .site-header { padding: 0 16px; }
+      .brand .logo-text { font-size: 17px; }
+    }
+    @media (max-width: 480px) {
+      .site-header { height: 64px; }
+      .brand .logo-icon { width: 30px; height: 30px; font-size: 12px; }
+      .brand .logo-text { font-size: 15px; }
+      .nav-menu { top: 64px; left: 12px; right: 12px; }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 5rem 0; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .section-title .gold { color: var(--color-accent); }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      font-weight: 350;
+      line-height: 1.7;
+    }
+    .section-desc.centered { margin: 0 auto; text-align: center; }
+    .text-center { text-align: center; }
+    .gold-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      margin: 0.8rem auto 1.5rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero-banner {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--color-bg);
+      overflow: hidden;
+    }
+    .hero-banner .bg-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    .hero-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(250,248,245,0.10) 0%,
+        rgba(250,248,245,0.20) 30%,
+        rgba(250,248,245,0.50) 55%,
+        rgba(250,248,245,0.80) 80%,
+        rgba(250,248,245,0.94) 100%
+      );
+      pointer-events: none;
+    }
+    .hero-banner .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .hero-content {
+      max-width: 540px;
+      padding-right: clamp(1rem, 5vw, 4.5rem);
+    }
+    .hero-content .sub-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-content h1 {
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .hero-content h1 strong { font-weight: 700; color: var(--color-accent); }
+    .hero-content p {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 440px;
+      line-height: 1.7;
+      font-weight: 350;
+      margin-bottom: 2rem;
+    }
+    .hero-content .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .hero-stats .stat {
+      flex: 1;
+      padding-right: 1.5rem;
+      border-right: 1px solid var(--color-border);
+    }
+    .hero-stats .stat:last-child { border-right: none; padding-right: 0; }
+    .hero-stats .stat:not(:first-child) { padding-left: 1.5rem; }
+    .hero-stats .stat .number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1.2;
+    }
+    .hero-stats .stat .label {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 768px) {
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+        padding: 1.8rem;
+        background: rgba(255,255,255,0.70);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius);
+        border: 1px solid var(--color-border);
+      }
+      .hero-content .sub-title { justify-content: center; }
+      .hero-content p { max-width: 100%; margin: 0 auto; }
+      .hero-content .btn-group { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-banner .overlay {
+        background: linear-gradient(180deg,
+          rgba(250,248,245,0.20) 0%,
+          rgba(250,248,245,0.50) 60%,
+          rgba(250,248,245,0.85) 100%
+        );
+      }
+    }
+
+    /* ===== ABOUT ===== */
+    .about-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      align-items: center;
+    }
+    .about-grid .about-text p {
+      color: var(--color-text-muted);
+      font-weight: 350;
+      line-height: 1.8;
+      margin: 1rem 0;
+    }
+    .about-grid .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .about-grid .about-stats .stat {
+      background: var(--color-bg);
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .about-grid .about-stats .stat .num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    .about-grid .about-stats .stat .label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+    .about-grid .about-image img {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      display: block;
+    }
+    .about-team {
+      margin-top: 4rem;
+      text-align: center;
+    }
+    .about-team .leaders {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .about-team .leader {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.5rem;
+      width: 200px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .about-team .leader:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .about-team .leader .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 auto 0.8rem;
+    }
+    .about-team .leader h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .about-team .leader .desig {
+      color: var(--color-accent);
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+    .about-form-wrapper {
+      margin-top: 3rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2.4rem 2.6rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: var(--shadow-card);
+    }
+    .about-form-wrapper h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+    .about-form-wrapper .form-sub {
+      text-align: center;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .about-form-wrapper .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .about-form-wrapper .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+      color: var(--color-text);
+    }
+    .about-form-wrapper .form-group input,
+    .about-form-wrapper .form-group select,
+    .about-form-wrapper .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: 1rem;
+      background: var(--color-surface);
+      transition: var(--transition);
+    }
+    .about-form-wrapper .form-group input:focus,
+    .about-form-wrapper .form-group select:focus,
+    .about-form-wrapper .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(184,149,58,0.10);
+    }
+    .about-form-wrapper .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .about-form-wrapper .btn-submit {
+      width: 100%;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      padding: 0.9rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .about-form-wrapper .btn-submit:hover {
+      background: #a17e2e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(184,149,58,0.20);
+    }
+    .about-form-wrapper .form-note {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-form-wrapper { padding: 1.6rem 1.2rem; }
+    }
+
+    /* ===== PACKAGES ===== */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .package-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
+    }
+    .package-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .package-card .pkg-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    .package-card .pkg-price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    .package-card .pkg-price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+    }
+    .package-card .pkg-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin: 0.6rem 0 1rem;
+    }
+    .package-card .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+    }
+    .package-card .features-list li {
+      padding: 0.2rem 0;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .package-card .features-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+    .package-card .btn { width: 100%; margin-top: auto; }
+
+    /* ===== ESTIMATOR ===== */
+    .estimator-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .estimator-box {
+      max-width: 720px;
+      margin: 2.5rem auto 0;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2.4rem 2.6rem;
+    }
+    .est-form-group { margin-bottom: 1.5rem; }
+    .est-package-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.7rem;
+    }
+    .est-package-option {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.9rem 0.7rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--color-text-muted);
+    }
+    .est-package-option.active {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+      color: var(--color-text);
+    }
+    .est-package-option .ep-name { font-weight: 700; font-size: 0.9rem; display: block; }
+    .est-package-option .ep-price { font-size: 0.78rem; color: var(--color-accent); display: block; }
+    .est-input {
+      width: 100%;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      font-size: 1rem;
+    }
+    .est-input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+    .est-result {
+      margin-top: 1.8rem;
+      padding: 1.5rem;
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(184,149,58,0.25);
+      border-radius: var(--radius);
+      display: none;
+    }
+    .est-result.visible { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+    .est-result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(184,149,58,0.15);
+    }
+    .est-result-total {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1.5px solid rgba(184,149,58,0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .est-result-total .value { font-size: 1.5rem; font-weight: 800; color: var(--color-accent); }
+    .est-btn-group {
+      display: flex;
+      gap: 0.9rem;
+      margin-top: 1.3rem;
+      flex-wrap: wrap;
+    }
+    .est-btn-group .btn { flex: 1; min-width: 140px; }
+
+    /* ===== SERVICES ===== */
+    .services-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--color-accent); box-shadow: var(--shadow-hover); }
+    .service-card .card-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .service-card .card-body { padding: 1.4rem; }
+    .service-card .icon-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius);
+      background: var(--color-accent-soft);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.6rem;
+    }
+    .service-card .icon-wrapper i { color: var(--color-accent); font-size: 1.1rem; }
+    .service-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .service-card p { font-size: 0.88rem; color: var(--color-text-muted); font-weight: 350; line-height: 1.6; }
+
+    /* ===== WHY US ===== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .why-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .why-card:hover { transform: translateY(-4px); border-color: var(--color-accent); box-shadow: var(--shadow-hover); }
+    .why-card .icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-accent-soft);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+    }
+    .why-card .icon-wrapper i { font-size: 1.3rem; color: var(--color-accent); }
+    .why-card h3 { font-size: 1.05rem; font-weight: 600; }
+    .why-card p { font-size: 0.88rem; color: var(--color-text-muted); font-weight: 350; }
+
+    /* ===== TRUSTED ===== */
+    .trusted-section {
+      background: var(--color-surface);
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .marquee-wrapper {
+      overflow: hidden;
+      padding: 1rem 0;
+      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .marquee-track .logo-item { height: 60px; display: flex; align-items: center; }
+    .marquee-track .logo-item img { max-height: 40px; width: auto; object-fit: contain; }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .trusted-stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.2rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      max-width: 600px;
+      margin: 1rem auto;
+      flex-wrap: wrap;
+    }
+    .stat-item .stat-number { font-size: 1.4rem; font-weight: 700; color: var(--color-accent); }
+    .stat-item .stat-label { font-size: 0.7rem; text-transform: uppercase; color: var(--color-text-muted); }
+
+    /* ===== CLIENTS CAROUSEL ===== */
+    .clients-carousel-section {
+      background: var(--color-surface);
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .clients-carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 10px 0;
+    }
+    .clients-carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .client-carousel-card {
+      flex: 0 0 calc(25% - 15px);
+      background: var(--color-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .client-carousel-card img { max-width: 80%; max-height: 80%; object-fit: contain; }
+    .clients-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .clients-carousel-btn:hover { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+    .clients-carousel-btn.prev { left: 5px; }
+    .clients-carousel-btn.next { right: 5px; }
+    .clients-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .clients-carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: var(--transition);
+    }
+    .clients-carousel-dots .dot.active {
+      background: var(--color-accent);
+      transform: scale(1.2);
+    }
+    @media (max-width: 768px) {
+      .client-carousel-card { flex: 0 0 calc(50% - 10px); }
+    }
+    @media (max-width: 480px) {
+      .client-carousel-card { flex: 0 0 100%; }
+    }
+
+    /* ===== GALLERY (marquee) ===== */
+    .project-gallery-section {
+      background: var(--color-surface);
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .gallery-marquee-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .gallery-marquee-row {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    }
+    .gallery-marquee-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+    .gallery-marquee-row:nth-child(1) .gallery-marquee-track { animation: scroll-left 30s linear infinite; }
+    .gallery-marquee-row:nth-child(2) .gallery-marquee-track { animation: scroll-right 35s linear infinite; }
+    .gallery-marquee-row:nth-child(3) .gallery-marquee-track { animation: scroll-left 32s linear infinite; }
+    .gallery-card {
+      flex: 0 0 180px;
+      padding: 4px;
+    }
+    .gallery-card .gallery-image {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: var(--radius);
+      object-fit: cover;
+      display: block;
+      background: #eaeaea;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-right {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    @media (max-width: 768px) { .gallery-card { flex: 0 0 140px; } }
+    @media (max-width: 480px) { .gallery-card { flex: 0 0 100px; } }
+
+    /* ===== SHOWCASE ===== */
+    .showcase-section {
+      background: var(--color-surface);
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .showcase-track-container {
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+    .showcase-track {
+      display: flex;
+      gap: 1rem;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .showcase-item {
+      flex: 0 0 calc(25% - 0.75rem);
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+    }
+    .showcase-item img { width: 100%; height: 100%; object-fit: cover; }
+    .showcase-item .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+    }
+    .showcase-item .play-overlay i { font-size: 2.8rem; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .showcase-item .video-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.6rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      color: #fff;
+      font-size: 0.7rem;
+    }
+    .showcase-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .showcase-nav button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .showcase-nav button:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent);
+      color: #fff;
+    }
+    .showcase-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .showcase-dots .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: var(--transition);
+    }
+    .showcase-dots .dot.active {
+      background: var(--color-accent);
+      width: 20px;
+      border-radius: 4px;
+    }
+    @media (max-width: 1024px) {
+      .showcase-item { flex: 0 0 calc(33.33% - 0.66rem); }
+    }
+    @media (max-width: 768px) {
+      .showcase-item { flex: 0 0 calc(50% - 0.5rem); }
+    }
+    @media (max-width: 480px) {
+      .showcase-item { flex: 0 0 100%; }
+    }
+
+    /* ===== PARTNERS ===== */
+    .partners-section {
+      background: var(--color-surface);
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .carousel-wrapper {
+      overflow: hidden;
+      padding: 1rem 0;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: scroll-partners 25s linear infinite;
+    }
+    .carousel-item {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 0.8rem 1.5rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+    }
+    .carousel-item img { max-height: 40px; width: auto; object-fit: contain; }
+    @keyframes scroll-partners {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      padding: 3rem 0;
+      background: var(--color-bg);
+    }
+    .contact-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .contact-card .phone {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-top: 1rem;
+    }
+    .contact-card .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0b1a2e;
+      color: #e2e8f0;
+      padding: 40px 20px 20px;
+      border-top: 4px solid var(--color-accent);
+    }
+    .footer-container { max-width: 1280px; margin: 0 auto; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 30px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #fbbf24; }
+    .contact-info .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+    .contact-info .contact-item i { width: 20px; color: var(--color-accent); }
+    .footer-cities {
+      border-top: 1px solid #1e3a5a;
+      border-bottom: 1px solid #1e3a5a;
+      padding: 20px 0;
+      margin-bottom: 30px;
+    }
+    .footer-cities .cities-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      justify-content: center;
+    }
+    .footer-cities .cities-row a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: color 0.2s;
+    }
+    .footer-cities .cities-row a:hover { color: #fbbf24; }
+    .footer-cities .cities-row .city-label {
+      color: #64748b;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 18px;
+    }
+    .footer-bottom .copyright { font-size: 0.8rem; color: #94a3b8; }
+    .app-links {
+      display: flex;
+      gap: 14px;
+    }
+    .app-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1e3a5a;
+      color: #e2e8f0;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .app-links a:hover { background: #2a4a6a; }
+    .app-links a i { font-size: 1.2rem; color: var(--color-accent); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>🏗️ Bigland Construction</h1>
-        <p>Premium Construction & Building Services</p>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>Welcome to Bigland Construction</h2>
-            <p>We are a leading construction company providing professional building services with quality and excellence. With years of experience in the industry, we deliver projects on time and within budget.</p>
-        </section>
-
-        <section class="section">
-            <h2>Our Services</h2>
-            <div class="services">
-                <div class="service-card">
-                    <h3>🏢 Commercial Buildings</h3>
-                    <p>Professional commercial construction projects tailored to your needs</p>
-                </div>
-                <div class="service-card">
-                    <h3>🏠 Residential Projects</h3>
-                    <p>Quality residential construction with modern design and durability</p>
-                </div>
-                <div class="service-card">
-                    <h3>🔧 Renovation & Restoration</h3>
-                    <p>Expert renovation services to transform your spaces</p>
-                </div>
-                <div class="service-card">
-                    <h3>📐 Project Planning</h3>
-                    <p>Comprehensive planning and consultation for your projects</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section">
-            <h2>Get in Touch</h2>
-            <div class="contact-info">
-                <p>📧 Email: info@bigland-construction.in</p>
-                <p>📱 Phone: +91-XXXXXXXXXX</p>
-                <p>🌐 Website: <a href="http://bigland-construction.in" style="color: white; text-decoration: underline;">bigland-construction.in</a></p>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Why Choose Us?</h2>
-            <ul style="list-style: none; padding: 0;">
-                <li>✅ 10+ Years of Industry Experience</li>
-                <li>✅ Expert Team of Engineers & Architects</li>
-                <li>✅ Quality Assurance at Every Stage</li>
-                <li>✅ On-Time Project Delivery</li>
-                <li>✅ Cost-Effective Solutions</li>
-                <li>✅ Customer Satisfaction Guaranteed</li>
-            </ul>
-        </section>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand">
+        <span class="logo-icon"><i class="fas fa-crown"></i></span>
+        <span class="logo-text">Bigland<span>Construction</span></span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#estimator">Estimator</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#trusted">Trusted</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#showcase">Showcase</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="btn-cta">Get Started</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2026 Bigland Construction. All rights reserved.</p>
-        <p>Powered by GitHub Pages</p>
-    </footer>
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="hero-banner">
+      <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1781864169/Construct_Your_Dream_Home_10_q0l87a.png" alt="Luxury home" class="bg-image" />
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="sub-title"><i class="fas fa-crown"></i> Premium Home Construction</div>
+          <h1>Construct Your <strong>Dream Home</strong> With BigLand</h1>
+          <p>Experience world-class luxury construction with premium materials, transparent processes, and a 10-year warranty.</p>
+          <div class="btn-group">
+            <a href="#estimator"><button class="btn btn-primary"><i class="fas fa-calculator"></i> Get Free Estimate</button></a>
+            <a href="#packages"><button class="btn btn-outline">Explore Packages</button></a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="number">20Lakhs+</span><span class="label">Sq. Ft.</span></div>
+            <div class="stat"><span class="number">470+</span><span class="label">Quality Checks</span></div>
+            <div class="stat"><span class="number">11+</span><span class="label">Years</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT (with Form) -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">About Us</span>
+          <h2 class="section-title">Building Trust, <span class="gold">One Home</span> at a Time</h2>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>BigLand Construction was founded with a simple belief: every family deserves a home built with integrity, quality, and care. Over the past 11 years, we've delivered over 2,000 homes across India, earning the trust of thousands of families.</p>
+            <p>Our approach combines traditional craftsmanship with modern technology, ensuring every project is completed on time, within budget, and to the highest standards. We are a team of passionate architects, engineers, and project managers who treat every home as if it were our own.</p>
+            <div class="about-stats">
+              <div class="stat"><span class="num">11+</span><span class="label">Years</span></div>
+              <div class="stat"><span class="num">2,000+</span><span class="label">Homes</span></div>
+              <div class="stat"><span class="num">98%</span><span class="label">Satisfaction</span></div>
+              <div class="stat"><span class="num">50+</span><span class="label">Brands</span></div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Construction team" />
+          </div>
+        </div>
+
+        <div class="about-team">
+          <h2 class="section-title">Meet Our <span class="gold">Leadership</span></h2>
+          <div class="leaders">
+            <div class="leader"><div class="avatar">RS</div><h4>Rahul Sharma</h4><p class="desig">Founder &amp; CEO</p></div>
+            <div class="leader"><div class="avatar">PS</div><h4>Priya Singh</h4><p class="desig">Co-Founder &amp; COO</p></div>
+            <div class="leader"><div class="avatar">AK</div><h4>Amit Kumar</h4><p class="desig">Head of Projects</p></div>
+          </div>
+        </div>
+
+        <!-- Google Form Connected Form -->
+        <div class="about-form-wrapper">
+          <h3>Get in Touch with Our Team</h3>
+          <p class="form-sub">Fill in your details and we'll get back to you within 24 hours.</p>
+          <form action="https://docs.google.com/forms/d/e/1FAIpQLSdWoQtiY2YOsNsRzOg1Bgo4xweKs-1FXKANody1wHRQTGAHTQ/formResponse" method="POST" target="_blank">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="entry.XXXXXX" placeholder="Enter your full name" required />
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="entry.XXXXXX" placeholder="Enter your email" required />
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" name="entry.XXXXXX" placeholder="Enter your phone number" required />
+            </div>
+            <div class="form-group">
+              <label>Your City *</label>
+              <select name="entry.XXXXXX" required>
+                <option value="">Select your city</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message / Comments</label>
+              <textarea name="entry.XXXXXX" placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+            <p class="form-note">By submitting, you agree to our Privacy Policy.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section id="packages">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Packages</span>
+          <h2 class="section-title">Choose Your <span class="gold">Construction</span> Plan</h2>
+          <p class="section-desc centered">Premium packages designed to match your vision, budget, and lifestyle.</p>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="package-grid">
+          <div class="package-card">
+            <h3 class="pkg-name">Basic</h3>
+            <div class="pkg-price">₹1950 <span>per sqft</span></div>
+            <p class="pkg-desc">Budget-friendly with trusted brands.</p>
+            <ul class="features-list"><li>Standard steel &amp; cement</li><li>Floor tiles upto ₹50/sqft</li><li>Standard flush doors</li></ul>
+            <button class="btn btn-outline">Learn More</button>
+          </div>
+          <div class="package-card">
+            <h3 class="pkg-name">Classic</h3>
+            <div class="pkg-price">₹2080 <span>per sqft</span></div>
+            <p class="pkg-desc">Best seller – upgraded brands.</p>
+            <ul class="features-list"><li>Jindal Steel &amp; Power</li><li>Floor tiles upto ₹100/sqft</li><li>Teak doors</li></ul>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+          <div class="package-card">
+            <h3 class="pkg-name">Premium</h3>
+            <div class="pkg-price">₹2410 <span>per sqft</span></div>
+            <p class="pkg-desc">Modern living with extra provisions.</p>
+            <ul class="features-list"><li>Superior steel &amp; cement</li><li>Floor tiles upto ₹140/sqft</li><li>Designer teak doors</li></ul>
+            <button class="btn btn-outline">Learn More</button>
+          </div>
+          <div class="package-card">
+            <h3 class="pkg-name">Royale</h3>
+            <div class="pkg-price">₹2650 <span>per sqft</span></div>
+            <p class="pkg-desc">Ultimate plan with high-end finishes.</p>
+            <ul class="features-list"><li>EV charging, copper gas</li><li>Floor tiles upto ₹160/sqft</li><li>Apex Ultima exterior</li></ul>
+            <button class="btn btn-outline">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESTIMATOR -->
+    <section id="estimator" class="estimator-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Instant Calculator</span>
+          <h2 class="section-title">Get Your <span class="gold">Cost Estimate</span></h2>
+          <p class="section-desc centered">Pick a package, enter area, get instant ballpark.</p>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="estimator-box">
+          <form id="estimateForm">
+            <div class="est-form-group">
+              <label>Package</label>
+              <div class="est-package-selector" id="estPackageSelect">
+                <div class="est-package-option active" data-package="Basic" data-price="1950"><span class="ep-name">Basic</span><span class="ep-price">₹1,950/sqft</span></div>
+                <div class="est-package-option" data-package="Classic" data-price="2080"><span class="ep-name">Classic</span><span class="ep-price">₹2,080/sqft</span></div>
+                <div class="est-package-option" data-package="Premium" data-price="2410"><span class="ep-name">Premium</span><span class="ep-price">₹2,410/sqft</span></div>
+                <div class="est-package-option" data-package="Royale" data-price="2650"><span class="ep-name">Royale</span><span class="ep-price">₹2,650/sqft</span></div>
+              </div>
+            </div>
+            <div class="est-form-group">
+              <label>Total built-up area</label>
+              <input type="number" id="estAreaInput" class="est-input" placeholder="e.g. 1200" min="100" step="10" value="1200" />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-calculator"></i> Calculate</button>
+          </form>
+          <div class="est-result" id="estResultPanel">
+            <div class="est-result-row"><span>Package</span><span id="estResultPackage">Basic</span></div>
+            <div class="est-result-row"><span>Area</span><span id="estResultArea">1,200 sqft</span></div>
+            <div class="est-result-row"><span>Rate</span><span id="estResultRate">₹1,950</span></div>
+            <div class="est-result-total"><span>Estimated Cost</span><span id="estResultTotal">₹23,40,000</span></div>
+            <div class="est-btn-group">
+              <button type="button" class="btn btn-outline" id="estResetBtn">Reset</button>
+              <a href="tel:+918409637705" class="btn btn-primary">Get Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">What We Do</span>
+          <h2 class="section-title">Services <span class="gold">We Offer</span></h2>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_ro8y81ro8y81ro8y_ceedsy.png" alt="Interiors" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-paint-roller"></i></div><h3>Interiors</h3><p>Tailored interior design that reflects your style.</p></div></div>
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_27_PM_l5y1vf.png" alt="Commercial" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-building"></i></div><h3>Commercial</h3><p>High‑quality commercial spaces for businesses.</p></div></div>
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209933/Gemini_Generated_Image_dxohrodxohrodxoh_1_fhidtq.png" alt="Architecture" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-drafting-compass"></i></div><h3>Architecture</h3><p>Expert planning and design for your dream project.</p></div></div>
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200609/imgi_38_7_1_jwx7no.png" alt="Residential" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-home"></i></div><h3>Residential</h3><p>Custom homes built with precision and care.</p></div></div>
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_21_PM_c2beun.png" alt="Renovation" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-hammer"></i></div><h3>Renovation</h3><p>Transform your existing space with expert renovation.</p></div></div>
+          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_hyw4lphyw4lphyw4_r8b25p.png" alt="Contractor" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-hard-hat"></i></div><h3>Contractor</h3><p>On‑site project management and execution.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why-us">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Why Choose Us</span>
+          <h2 class="section-title">Why Work <span class="gold">With Us</span></h2>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="why-grid">
+          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-trophy"></i></div><h3>10+ Years</h3><p>Decades of experience delivering premium projects.</p></div>
+          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-shield-alt"></i></div><h3>470+ Checks</h3><p>Rigorous quality assurance at every step.</p></div>
+          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-hand-holding-heart"></i></div><h3>Transparent</h3><p>Real‑time tracking and clear contracts.</p></div>
+          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-clock"></i></div><h3>On‑Time</h3><p>Commitment to delivery as promised.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUSTED -->
+    <section id="trusted" class="trusted-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Credibility</span>
+          <h2 class="section-title">Trusted <span class="gold">By</span></h2>
+          <div class="gold-divider"></div>
+        </div>
+        <div class="marquee-wrapper">
+          <div class="marquee-track" id="trustedMarquee"></div>
+        </div>
+        <div class="trusted-stats-bar">
+          <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Trusted Brands</span></div>
+          <div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Satisfaction</span></div>
+          <div class="stat-item"><span class="stat-number">11+</span><span class="stat-label">Years</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTS CAROUSEL -->
+    <section id="clients" class="clients-carousel-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Clients</span>
+          <h2 class="section-title">Trusted <span class="gold">Partners</span></h2>
+        </div>
+        <div class="clients-carousel-wrapper" id="clientsCarouselWrapper">
+          <div class="clients-carousel-track" id="clientsCarouselTrack"></div>
+          <button class="clients-carousel-btn prev" id="clientsCarouselPrev"><i class="fas fa-chevron-left"></i></button>
+          <button class="clients-carousel-btn next" id="clientsCarouselNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="clients-carousel-dots" id="clientsCarouselDots"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="project-gallery-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Projects</span>
+          <h2 class="section-title">Complete <span class="gold">Project</span> Gallery</h2>
+        </div>
+        <div class="gallery-marquee-wrapper" id="galleryMarqueeWrapper"></div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section id="showcase" class="showcase-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Portfolio</span>
+          <h2 class="section-title">Complete <span class="gold">Project</span> Showcase</h2>
+        </div>
+        <div class="showcase-wrapper">
+          <div class="showcase-track-container"><div class="showcase-track" id="showcaseTrack"></div></div>
+          <div class="showcase-nav"><button id="showcasePrev"><i class="fas fa-chevron-left"></i></button><button id="showcaseNext"><i class="fas fa-chevron-right"></i></button></div>
+          <div class="showcase-dots" id="showcaseDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners" class="partners-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label">Our Banking Partners</span>
+          <h2 class="section-title">Our <span class="gold">Banking</span> Partners</h2>
+        </div>
+        <div class="carousel-wrapper"><div class="carousel-track" id="carouselTrack"></div></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="contact-card">
+          <span class="section-label">Start Your Journey</span>
+          <h2>Let's Build Your <span class="gold">Dream Home</span></h2>
+          <p>Get a free consultation and estimate. Our team will respond within 20 minutes.</p>
+          <div class="btn-group">
+            <a href="#estimator" class="btn btn-primary">Get Free Estimate</a>
+            <a href="#" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Call Now</a>
+          </div>
+          <div class="phone"><i class="fas fa-phone-alt"></i> <a href="tel:+918409637705">+91 84096 37705</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col"><h4>Site Map</h4><ul><li><a href="#">How it Works</a></li><li><a href="#">Our Projects</a></li><li><a href="#">Cost Estimator</a></li><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li></ul></div>
+        <div class="footer-col"><h4>Information</h4><ul><li><a href="#">Terms &amp; Conditions</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">FAQs</a></li><li><a href="#">Referral Policy</a></li></ul></div>
+        <div class="footer-col"><h4>Our Services</h4><ul><li><a href="#">Residential</a></li><li><a href="#">Commercial</a></li><li><a href="#">Renovation</a></li><li><a href="#">Interiors</a></li></ul></div>
+        <div class="footer-col contact-col"><h4>Get in Touch</h4><div class="contact-info"><div class="contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+918409637705">+91 84096 37705</a></div><div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@biglandconstruction.com">info@biglandconstruction.com</a></div><div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Patna, Bihar</span></div></div></div>
+      </div>
+      <div class="footer-cities"><div class="cities-row">
+        <span class="city-label">Bihar</span><a href="#">Patna</a><a href="#">Gaya</a><a href="#">Bhagalpur</a><a href="#">Muzaffarpur</a>
+        <span class="city-label">Jharkhand</span><a href="#">Ranchi</a><a href="#">Jamshedpur</a><a href="#">Dhanbad</a>
+        <span class="city-label">Uttar Pradesh</span><a href="#">Lucknow</a><a href="#">Varanasi</a><a href="#">Kanpur</a><a href="#">Noida</a>
+      </div></div>
+      <div class="footer-bottom">
+        <div class="app-links"><a href="#"><i class="fab fa-google-play"></i><span>Google Play</span></a><a href="#"><i class="fab fa-apple"></i><span>App Store</span></a></div>
+        <div class="copyright">© 2026 Bigland Construction. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      menuToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('open');
+        this.setAttribute('aria-expanded', navMenu.classList.contains('open'));
+      });
+      document.querySelectorAll('#navMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // COST ESTIMATOR
+      (function() {
+        const options = document.querySelectorAll('.est-package-option');
+        const areaInput = document.getElementById('estAreaInput');
+        const form = document.getElementById('estimateForm');
+        const resultPanel = document.getElementById('estResultPanel');
+        const resultPackage = document.getElementById('estResultPackage');
+        const resultArea = document.getElementById('estResultArea');
+        const resultRate = document.getElementById('estResultRate');
+        const resultTotal = document.getElementById('estResultTotal');
+        const resetBtn = document.getElementById('estResetBtn');
+
+        let selectedPackage = 'Basic';
+        let selectedPrice = 1950;
+
+        options.forEach(opt => {
+          opt.addEventListener('click', function() {
+            options.forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+            selectedPackage = this.dataset.package;
+            selectedPrice = parseInt(this.dataset.price, 10);
+            if (resultPanel.classList.contains('visible')) updateResult();
+          });
+        });
+
+        function updateResult() {
+          const area = parseInt(areaInput.value, 10) || 0;
+          const valid = area >= 100 ? area : 0;
+          const total = valid * selectedPrice;
+          resultPackage.textContent = selectedPackage;
+          resultArea.textContent = valid.toLocaleString('en-IN') + ' sqft';
+          resultRate.textContent = '₹' + selectedPrice.toLocaleString('en-IN');
+          resultTotal.textContent = '₹' + total.toLocaleString('en-IN');
+        }
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const area = parseInt(areaInput.value, 10);
+          if (isNaN(area) || area < 100) {
+            alert('Please enter a valid area (min 100 sqft).');
+            return;
+          }
+          resultPanel.classList.add('visible');
+          updateResult();
+          setTimeout(() => resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+        });
+
+        resetBtn.addEventListener('click', function() {
+          options.forEach(o => o.classList.remove('active'));
+          document.querySelector('.est-package-option[data-package="Basic"]').classList.add('active');
+          selectedPackage = 'Basic';
+          selectedPrice = 1950;
+          areaInput.value = 1200;
+          resultPanel.classList.remove('visible');
+        });
+      })();
+
+      // TRUSTED MARQUEE
+      const trustedLogos = [
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/5-2.png',
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/6-1.png',
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/3-3.png',
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/4-3.png'
+      ];
+      const tm = document.getElementById('trustedMarquee');
+      if (tm) {
+        [...trustedLogos, ...trustedLogos].forEach((src, i) => {
+          const div = document.createElement('div');
+          div.className = 'logo-item';
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Trusted Brand';
+          img.loading = 'lazy';
+          div.appendChild(img);
+          tm.appendChild(div);
+        });
+      }
+
+      // CLIENTS CAROUSEL
+      const clientImages = [
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_73_shishu_fprga7.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_74_images_nvbgkx.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_70_nivan-homes_rfkleq.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_71_sars_loeyuh.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_72_vidya-instutte_nfgks3.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_75_krishna-instioinstitution-of-para-medical-scrines_tdwmi3.jpg',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_77_sk-mandal_r5eyah.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208436/imgi_76_RSS_1_jmgdjj.jpg'
+      ];
+      const clientTrack = document.getElementById('clientsCarouselTrack');
+      const clientDots = document.getElementById('clientsCarouselDots');
+      const clientPrev = document.getElementById('clientsCarouselPrev');
+      const clientNext = document.getElementById('clientsCarouselNext');
+      const clientWrapper = document.getElementById('clientsCarouselWrapper');
+
+      let clientIdx = 0, clientPerView = 4, clientTotal = 0;
+
+      function buildClients() {
+        clientTrack.innerHTML = ''; clientDots.innerHTML = '';
+        const w = window.innerWidth;
+        clientPerView = w < 480 ? 1 : w < 768 ? 2 : w < 1024 ? 3 : 4;
+        clientImages.forEach((src, i) => {
+          const card = document.createElement('div');
+          card.className = 'client-carousel-card';
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Client';
+          img.loading = 'lazy';
+          card.appendChild(img);
+          clientTrack.appendChild(card);
+        });
+        clientTotal = Math.ceil(clientImages.length / clientPerView);
+        for (let i = 0; i < clientTotal; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => goClient(i));
+          clientDots.appendChild(dot);
+        }
+        goClient(0);
+      }
+
+      function goClient(idx) {
+        if (idx < 0) idx = 0;
+        if (idx >= clientTotal) idx = clientTotal - 1;
+        clientIdx = idx;
+        const gap = 20;
+        const containerW = clientWrapper.offsetWidth;
+        const itemW = (containerW - (clientPerView - 1) * gap) / clientPerView;
+        const slideW = itemW + gap;
+        const offset = idx * slideW * clientPerView;
+        clientTrack.style.transform = 'translateX(-' + offset + 'px)';
+        clientTrack.querySelectorAll('.client-carousel-card').forEach(c => c.style.flex = '0 0 ' + itemW + 'px');
+        clientDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        clientPrev.disabled = idx === 0;
+        clientNext.disabled = idx >= clientTotal - 1;
+      }
+
+      clientPrev.addEventListener('click', () => goClient(clientIdx - 1));
+      clientNext.addEventListener('click', () => goClient(clientIdx + 1));
+      window.addEventListener('resize', () => { buildClients(); });
+      buildClients();
+
+      // GALLERY MARQUEE
+      const galleryImages = [
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200586/imgi_32_16_toztgd.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200587/imgi_33_6_o9ypvi.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200588/imgi_34_9_aduo9m.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200588/imgi_37_1-2_pji4eh.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200590/imgi_35_10_nlsvq7.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200590/imgi_41_2-2_khaqmc.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200590/imgi_38_7_wuo9sy.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200592/imgi_39_3-2_qfhawe.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200592/imgi_36_12_gamv59.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200594/imgi_52_4_f8mfmx.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200594/imgi_42_8_x05qkj.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200595/imgi_43_6_q9cj5h.png'
+      ];
+      const galWrap = document.getElementById('galleryMarqueeWrapper');
+      const rowSize = [4, 4, 4];
+      let start = 0;
+      rowSize.forEach(cnt => {
+        const items = galleryImages.slice(start, start + cnt);
+        start += cnt;
+        const row = document.createElement('div');
+        row.className = 'gallery-marquee-row';
+        const track = document.createElement('div');
+        track.className = 'gallery-marquee-track';
+        items.concat(items).forEach(src => {
+          const card = document.createElement('div');
+          card.className = 'gallery-card';
+          const img = document.createElement('img');
+          img.className = 'gallery-image';
+          img.src = src;
+          img.alt = 'Project';
+          img.loading = 'lazy';
+          card.appendChild(img);
+          track.appendChild(card);
+        });
+        row.appendChild(track);
+        galWrap.appendChild(row);
+      });
+
+      // SHOWCASE
+      const videoIds = ['SRDA5bsCevM', 'mwb00JXv6IM', 'm_andFPfOx4', '2tbg0IZQ6oA', 'oRTQEckEdR8'];
+      const videoTitles = ['Luxury Villa', 'Modern Apartment', 'Commercial Office', 'Residential Tower', 'Interior Design'];
+      const showTrack = document.getElementById('showcaseTrack');
+      const showDots = document.getElementById('showcaseDots');
+      const showPrev = document.getElementById('showcasePrev');
+      const showNext = document.getElementById('showcaseNext');
+      let showIdx = 0, showPerView = 4, showTotal = 0;
+
+      function buildShowcase() {
+        showTrack.innerHTML = ''; showDots.innerHTML = '';
+        const w = window.innerWidth;
+        showPerView = w < 480 ? 1 : w < 768 ? 2 : w < 1024 ? 3 : 4;
+        videoIds.forEach((id, i) => {
+          const item = document.createElement('div');
+          item.className = 'showcase-item';
+          item.dataset.videoId = id;
+          const img = document.createElement('img');
+          img.src = 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg';
+          img.alt = videoTitles[i] || 'Video';
+          img.loading = 'lazy';
+          const overlay = document.createElement('div');
+          overlay.className = 'play-overlay';
+          overlay.innerHTML = '<i class="fas fa-play-circle"></i>';
+          const title = document.createElement('div');
+          title.className = 'video-title';
+          title.textContent = videoTitles[i] || 'Project';
+          item.appendChild(img);
+          item.appendChild(overlay);
+          item.appendChild(title);
+          item.addEventListener('click', () => {
+            alert('Video ID: ' + id + ' (YouTube embed would open here)');
+          });
+          showTrack.appendChild(item);
+        });
+        showTotal = Math.ceil(videoIds.length / showPerView);
+        for (let i = 0; i < showTotal; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => goShow(i));
+          showDots.appendChild(dot);
+        }
+        goShow(0);
+      }
+
+      function goShow(idx) {
+        if (idx < 0) idx = 0;
+        if (idx >= showTotal) idx = showTotal - 1;
+        showIdx = idx;
+        const gap = 16;
+        const containerW = document.querySelector('.showcase-track-container').offsetWidth;
+        const itemW = (containerW - (showPerView - 1) * gap) / showPerView;
+        const slideW = itemW + gap;
+        const offset = idx * slideW * showPerView;
+        showTrack.style.transform = 'translateX(-' + offset + 'px)';
+        showTrack.querySelectorAll('.showcase-item').forEach(c => c.style.flex = '0 0 ' + itemW + 'px');
+        showDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        showPrev.disabled = idx === 0;
+        showNext.disabled = idx >= showTotal - 1;
+      }
+
+      showPrev.addEventListener('click', () => goShow(showIdx - 1));
+      showNext.addEventListener('click', () => goShow(showIdx + 1));
+      window.addEventListener('resize', () => { buildShowcase(); });
+      buildShowcase();
+
+      // PARTNERS CAROUSEL
+      const partners = [
+        { name: 'Bajaj Finserv', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/bajaj.webp' },
+        { name: 'BASIC', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/basic.webp' },
+        { name: 'Godrej', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/godrej.webp' },
+        { name: 'HDFC', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/hdfc_home_loan.webp' },
+        { name: 'Housing.com', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/housing.webp' },
+        { name: 'SBI', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/sbi_home_loan.webp' }
+      ];
+      const partnerTrack = document.getElementById('carouselTrack');
+      if (partnerTrack) {
+        partners.concat(partners).forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'carousel-item';
+          const img = document.createElement('img');
+          img.src = p.img;
+          img.alt = p.name;
+          img.loading = 'lazy';
+          item.appendChild(img);
+          partnerTrack.appendChild(item);
+        });
+      }
+
+      console.log('BigLand · All sections loaded ✅');
+    })();
+  </script>
 </body>
 </html>
