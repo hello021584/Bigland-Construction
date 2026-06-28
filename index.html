@@ -4,14 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>BigLand · Premium Builders</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome -->
+  <!-- Font Awesome (CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
   <style>
-    /* ===== ROOT VARIABLES – Gold Theme ===== */
+    /* ============================================================
+       CSS VARIABLES — Minimalist Gold Theme
+       ============================================================ */
     :root {
       --color-bg: #faf8f5;
       --color-surface: #ffffff;
@@ -19,30 +23,61 @@
       --color-text-muted: #6b6760;
       --color-accent: #b8953a;
       --color-accent-soft: #e8dfce;
+      --color-accent-light: #e8d5a3;
       --color-border: #e6e2da;
       --font-family: 'Inter', sans-serif;
       --radius: 10px;
       --radius-full: 60px;
-      --shadow-card: 0 1px 3px rgba(0,0,0,0.03);
-      --shadow-hover: 0 6px 20px rgba(0,0,0,0.05);
+      --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
+      --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.05);
       --transition: 0.25s ease;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+
+    /* ---------- RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: var(--font-family);
       background: var(--color-bg);
       color: var(--color-text);
       line-height: 1.6;
+      padding-top: 68px;
     }
-    a { text-decoration: none; color: inherit; }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* ===== BUTTONS ===== */
+    /* ---------- SKIP LINK ---------- */
+    .skip-link {
+      position: absolute;
+      top: -1000px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-accent);
+      color: #fff;
+      padding: 0.6rem 1.8rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.85rem;
+      z-index: 10000;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* ---------- BUTTONS ---------- */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -61,6 +96,10 @@
       min-height: 44px;
       min-width: 44px;
     }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
     .btn-primary {
       background: var(--color-accent);
       color: #fff;
@@ -70,28 +109,35 @@
       background: #a17e2e;
       border-color: #a17e2e;
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(184,149,58,0.20);
+      box-shadow: 0 4px 16px rgba(184, 149, 58, 0.20);
     }
     .btn-outline {
       border-color: var(--color-border);
+      background: transparent;
+      color: var(--color-text);
     }
     .btn-outline:hover {
       border-color: var(--color-accent);
       background: var(--color-accent-soft);
+      transform: translateY(-1px);
     }
 
-    /* ===== HEADER ===== */
+    /* ============================================================
+       HEADER
+       ============================================================ */
     .site-header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      background: #0b1a2e;
-      border-bottom: 3px solid var(--color-accent);
-      padding: 0 30px;
-      height: 72px;
+      background: #07111f;
+      border-bottom: 2px solid var(--color-accent);
+      height: 68px;
       display: flex;
       align-items: center;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.20);
+      padding: 0 28px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.30);
     }
     .header-container {
       max-width: 1280px;
@@ -100,6 +146,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 24px;
     }
     .brand {
       display: flex;
@@ -109,156 +156,373 @@
       flex-shrink: 0;
     }
     .brand .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--color-accent);
-      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #b8953a 0%, #d4b060 100%);
+      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-weight: 800;
-      font-size: 15px;
+      font-size: 16px;
+      box-shadow: 0 2px 12px rgba(184, 149, 58, 0.4);
     }
     .brand .logo-text {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.3px;
+      line-height: 1.15;
     }
-    .brand .logo-text span { color: var(--color-accent); }
+    .brand .logo-text .logo-sub {
+      display: block;
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--color-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       list-style: none;
     }
     .nav-menu a {
-      color: #cbd5e1;
+      color: #94a3b8;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 40px;
+      padding: 7px 13px;
+      border-radius: 8px;
       transition: all 0.2s ease;
       white-space: nowrap;
     }
-    .nav-menu a:hover {
-      background: rgba(184,149,58,0.12);
-      color: #ffffff;
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background: rgba(184, 149, 58, 0.10);
+      color: #f1c97a;
+    }
+    .more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .more-btn:hover {
+      background: rgba(184, 149, 58, 0.10);
+      color: #f1c97a;
+      border-color: rgba(184, 149, 58, 0.25);
+    }
+    .more-btn i {
+      font-size: 9px;
+      transition: transform 0.3s ease;
+    }
+    .more-btn.active i {
+      transform: rotate(180deg);
     }
     .nav-menu .btn-cta {
-      background: var(--color-accent);
+      background: linear-gradient(135deg, #b8953a 0%, #d4b060 100%);
       color: #fff;
-      padding: 8px 24px;
+      padding: 8px 22px;
       font-weight: 600;
-      box-shadow: 0 2px 12px rgba(184,149,58,0.30);
-      margin-left: 6px;
+      font-size: 13px;
+      border-radius: 8px;
+      box-shadow: 0 2px 14px rgba(184, 149, 58, 0.35);
+      margin-left: 8px;
+      letter-spacing: 0.01em;
     }
     .nav-menu .btn-cta:hover {
-      background: #a17e2e;
+      background: linear-gradient(135deg, #a17e2e 0%, #b8953a 100%);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(184, 149, 58, 0.45);
+      color: #fff;
+    }
+    .nav-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-accent) !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      border: 1px solid rgba(184, 149, 58, 0.25) !important;
+      padding: 7px 13px !important;
+      border-radius: 8px !important;
+    }
+    .nav-phone:hover {
+      background: rgba(184, 149, 58, 0.12) !important;
+      color: #f1c97a !important;
     }
     .menu-toggle {
       display: none;
       flex-direction: column;
       gap: 5px;
       background: none;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
-      padding: 4px;
+      padding: 8px 10px;
+      border-radius: 8px;
     }
     .menu-toggle span {
       display: block;
-      width: 26px;
+      width: 22px;
       height: 2px;
-      background: #fff;
+      background: #94a3b8;
       border-radius: 4px;
       transition: 0.3s ease;
     }
+
+    /* MODAL (More) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-content {
+      background: #0b1a2e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      max-width: 880px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 40px 40px 30px;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.60);
+      color: #e2e8f0;
+    }
+    .modal-content::-webkit-scrollbar { width: 4px; }
+    .modal-content::-webkit-scrollbar-track { background: transparent; }
+    .modal-content::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 10px; }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 28px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    .modal-close:hover {
+      color: #fff;
+      background: rgba(184, 149, 58, 0.15);
+      transform: rotate(90deg);
+    }
+    .modal-get-started-heading {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 18px;
+      margin-top: 4px;
+    }
+    .modal-get-started-heading i { margin-right: 6px; }
+    .modal-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .modal-feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: #e2e8f0;
+    }
+    .modal-feature-card:hover {
+      background: rgba(184, 149, 58, 0.08);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+    }
+    .modal-feature-card .icon {
+      font-size: 22px;
+      color: var(--color-accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .modal-feature-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .modal-feature-card p {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .modal-resources-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px 30px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
+    }
+    .modal-resources-section .res-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+    .modal-resources-section .res-title i { margin-right: 6px; }
+    .modal-resources-section .res-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .modal-resources-section .res-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .modal-resources-section .res-links a:hover {
+      color: var(--color-accent);
+    }
+    .modal-resources-section .res-links a .free-badge {
+      display: inline-block;
+      background: rgba(184, 149, 58, 0.15);
+      color: var(--color-accent);
+      font-size: 8px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 40px;
+      margin-left: 4px;
+      letter-spacing: 0.06em;
+    }
+    .modal-resources-section .res-links a i {
+      font-size: 10px;
+      margin-right: 4px;
+      color: var(--color-accent);
+      opacity: 0.6;
+    }
+    .modal-bottom {
+      text-align: center;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 15px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+    }
+    .modal-bottom strong { color: #fff; font-weight: 700; }
+    .modal-bottom .gold { color: var(--color-accent); }
+
     @media (max-width: 820px) {
       .menu-toggle { display: flex; }
       .nav-menu {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 72px;
+        top: 68px;
         left: 16px;
         right: 16px;
-        background: #0b1a2e;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 16px;
-        padding: 16px;
+        background: #07111f;
+        border: 1px solid rgba(184, 149, 58, 0.18);
+        border-radius: 14px;
+        padding: 14px;
         gap: 4px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.60);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.60);
       }
       .nav-menu.open { display: flex; }
-      .nav-menu a {
+      .nav-menu a,
+      .more-btn {
         width: 100%;
         padding: 12px 16px;
-        border-radius: 12px;
-        font-size: 15px;
+        border-radius: 10px;
+        font-size: 14px;
+        justify-content: flex-start;
+        border: none;
       }
+      .nav-phone { display: none !important; }
       .nav-menu .btn-cta {
         text-align: center;
         margin-left: 0;
-        margin-top: 4px;
+        margin-top: 6px;
         justify-content: center;
+        border-radius: 10px;
       }
-      .site-header { padding: 0 16px; }
+      .site-header { padding: 0 16px; height: 64px; }
       .brand .logo-text { font-size: 17px; }
+      .modal-content { padding: 28px 20px 20px; }
+      .modal-feature-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .modal-resources-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .modal-resources-section .res-links { gap: 4px 14px; }
+      .modal-resources-section .res-links a { font-size: 12px; white-space: normal; }
     }
     @media (max-width: 480px) {
-      .site-header { height: 64px; }
-      .brand .logo-icon { width: 30px; height: 30px; font-size: 12px; }
+      .site-header { height: 60px; padding: 0 12px; }
+      body { padding-top: 60px; }
+      .brand .logo-icon { width: 32px; height: 32px; font-size: 13px; }
       .brand .logo-text { font-size: 15px; }
-      .nav-menu { top: 64px; left: 12px; right: 12px; }
+      .nav-menu { top: 60px; left: 12px; right: 12px; }
+      .modal-content { padding: 20px 14px 16px; border-radius: 16px; }
+      .modal-feature-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .modal-feature-card { padding: 14px 10px; }
+      .modal-feature-card h4 { font-size: 12px; }
+      .modal-feature-card p { font-size: 10px; }
+      .modal-resources-section .res-links a { font-size: 11px; }
+      .modal-bottom { font-size: 13px; }
     }
 
-    /* ===== SECTION COMMON ===== */
-    section { padding: 5rem 0; }
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      display: inline-block;
-      margin-bottom: 0.3rem;
-    }
-    .section-title {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.4rem;
-    }
-    .section-title .gold { color: var(--color-accent); }
-    .section-desc {
-      font-size: 1rem;
-      color: var(--color-text-muted);
-      max-width: 600px;
-      font-weight: 350;
-      line-height: 1.7;
-    }
-    .section-desc.centered { margin: 0 auto; text-align: center; }
-    .text-center { text-align: center; }
-    .gold-divider {
-      width: 48px;
-      height: 2px;
-      background: var(--color-accent);
-      border-radius: 2px;
-      margin: 0.8rem auto 1.5rem;
-    }
-
-    /* ===== HERO ===== */
+    /* ============================================================
+       HERO
+       ============================================================ */
     .hero-banner {
       position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: var(--color-bg);
       overflow: hidden;
+      isolation: isolate;
+      background: var(--color-bg);
     }
     .hero-banner .bg-image {
       position: absolute;
@@ -267,28 +531,31 @@
       height: 100%;
       object-fit: cover;
       object-position: center 30%;
+      display: block;
     }
     .hero-banner .overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(90deg,
-        rgba(250,248,245,0.10) 0%,
-        rgba(250,248,245,0.20) 30%,
-        rgba(250,248,245,0.50) 55%,
-        rgba(250,248,245,0.80) 80%,
-        rgba(250,248,245,0.94) 100%
-      );
+          rgba(250, 248, 245, 0.10) 0%,
+          rgba(250, 248, 245, 0.20) 30%,
+          rgba(250, 248, 245, 0.50) 55%,
+          rgba(250, 248, 245, 0.80) 80%,
+          rgba(250, 248, 245, 0.94) 100%);
       pointer-events: none;
     }
     .hero-banner .container {
       position: relative;
       z-index: 2;
       width: 100%;
+      max-width: 1400px;
       display: flex;
       justify-content: flex-end;
     }
     .hero-content {
       max-width: 540px;
+      width: 100%;
+      text-align: left;
       padding-right: clamp(1rem, 5vw, 4.5rem);
     }
     .hero-content .sub-title {
@@ -308,8 +575,12 @@
       line-height: 1.1;
       letter-spacing: -0.02em;
       margin-bottom: 0.8rem;
+      color: var(--color-text);
     }
-    .hero-content h1 strong { font-weight: 700; color: var(--color-accent); }
+    .hero-content h1 strong {
+      font-weight: 700;
+      color: var(--color-accent);
+    }
     .hero-content p {
       font-size: 1.05rem;
       color: var(--color-text-muted);
@@ -335,11 +606,17 @@
       padding-right: 1.5rem;
       border-right: 1px solid var(--color-border);
     }
-    .hero-stats .stat:last-child { border-right: none; padding-right: 0; }
-    .hero-stats .stat:not(:first-child) { padding-left: 1.5rem; }
+    .hero-stats .stat:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .hero-stats .stat:not(:first-child) {
+      padding-left: 1.5rem;
+    }
     .hero-stats .stat .number {
       font-size: 1.6rem;
       font-weight: 700;
+      color: var(--color-text);
       display: block;
       line-height: 1.2;
     }
@@ -350,12 +627,20 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
+    @media (max-width: 1024px) {
+      .hero-content { padding-right: 2rem; }
+    }
     @media (max-width: 768px) {
+      .hero-banner {
+        min-height: 100vh;
+        padding: 5rem 0 2.5rem;
+      }
+      .hero-banner .container { justify-content: center; }
       .hero-content {
         max-width: 100%;
         text-align: center;
         padding: 1.8rem;
-        background: rgba(255,255,255,0.70);
+        background: rgba(255, 255, 255, 0.70);
         backdrop-filter: blur(6px);
         border-radius: var(--radius);
         border: 1px solid var(--color-border);
@@ -366,14 +651,671 @@
       .hero-stats { justify-content: center; }
       .hero-banner .overlay {
         background: linear-gradient(180deg,
-          rgba(250,248,245,0.20) 0%,
-          rgba(250,248,245,0.50) 60%,
-          rgba(250,248,245,0.85) 100%
-        );
+            rgba(250, 248, 245, 0.20) 0%,
+            rgba(250, 248, 245, 0.50) 60%,
+            rgba(250, 248, 245, 0.85) 100%);
       }
     }
+    @media (max-width: 480px) {
+      .hero-stats .stat { padding: 0 0.8rem; }
+      .hero-stats .stat .number { font-size: 1.3rem; }
+      .hero-stats .stat .label { font-size: 0.55rem; }
+    }
 
-    /* ===== ABOUT ===== */
+    /* ============================================================
+       SECTION COMMON
+       ============================================================ */
+    section {
+      padding: 6rem 0;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      color: var(--color-text);
+    }
+    .section-title .gold {
+      color: var(--color-accent);
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      font-weight: 350;
+      line-height: 1.7;
+    }
+    .section-desc.centered {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .gold-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      margin: 0.8rem 0 1.5rem;
+    }
+    .gold-divider.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== MOTION: Scroll-Triggered Animations ===== */
+    .motion-fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .motion-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .motion-fade-in {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .motion-fade-in.visible {
+      opacity: 1;
+    }
+    .motion-scale-in {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .motion-scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Stagger children helpers */
+    .stagger-children > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .stagger-children.visible > *:nth-child(1) { transition-delay: 0.04s; }
+    .stagger-children.visible > *:nth-child(2) { transition-delay: 0.10s; }
+    .stagger-children.visible > *:nth-child(3) { transition-delay: 0.16s; }
+    .stagger-children.visible > *:nth-child(4) { transition-delay: 0.22s; }
+    .stagger-children.visible > *:nth-child(5) { transition-delay: 0.28s; }
+    .stagger-children.visible > *:nth-child(6) { transition-delay: 0.34s; }
+    .stagger-children.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       PACKAGES
+       ============================================================ */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .package-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .package-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .package-card .popular-badge {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.15rem 0.7rem;
+      border-radius: var(--radius-full);
+    }
+    .package-card .pkg-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.05rem;
+    }
+    .package-card .pkg-price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin: 0.1rem 0 0.3rem;
+    }
+    .package-card .pkg-price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+    }
+    .package-card .pkg-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      font-weight: 350;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      min-height: 2.6rem;
+    }
+    .package-card .highlights-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.4rem;
+    }
+    .package-card .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+      flex-grow: 1;
+    }
+    .package-card .features-list li {
+      padding: 0.2rem 0;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.5;
+      font-weight: 350;
+    }
+    .package-card .features-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 0.65rem;
+      top: 0.2rem;
+    }
+    .package-card .brand-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      align-items: center;
+      padding: 0.6rem 0;
+      margin: 0.2rem 0 1rem;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .package-card .brand-logos .brand {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .package-card .brand-logos .brand.gold {
+      color: var(--color-accent);
+    }
+    .package-card .btn {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    /* ============================================================
+       COST ESTIMATOR
+       ============================================================ */
+    .estimator-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .estimator-box {
+      max-width: 720px;
+      margin: 2.5rem auto 0;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2.4rem 2.6rem;
+      box-shadow: var(--shadow-card);
+    }
+    .est-form-group {
+      margin-bottom: 1.5rem;
+    }
+    .est-form-group>label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.01em;
+    }
+    .est-package-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.7rem;
+    }
+    .est-package-option {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.9rem 0.7rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--color-text-muted);
+      position: relative;
+    }
+    .est-package-option:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+    }
+    .est-package-option.active {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+      color: var(--color-text);
+      box-shadow: 0 0 0 1px rgba(184, 149, 58, 0.15);
+    }
+    .est-package-option .ep-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: block;
+    }
+    .est-package-option .ep-price {
+      font-size: 0.78rem;
+      color: var(--color-accent);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .est-package-option .ep-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--color-accent);
+      color: #fff;
+      padding: 0.1rem 0.5rem;
+      border-radius: var(--radius-full);
+      margin-top: 0.35rem;
+    }
+    .est-area-group {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .est-input {
+      flex: 1;
+      width: 100%;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      color: var(--color-text);
+      transition: var(--transition);
+    }
+    .est-input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(184, 149, 58, 0.10);
+    }
+    .est-input.error {
+      border-color: #d64545;
+    }
+    .est-unit {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+    .est-error {
+      color: #d64545;
+      font-size: 0.78rem;
+      margin-top: 0.4rem;
+      display: none;
+    }
+    .est-error.visible {
+      display: block;
+    }
+    .est-help {
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .est-calc-btn {
+      width: 100%;
+    }
+    .est-result {
+      margin-top: 1.8rem;
+      padding: 1.6rem 1.8rem;
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(184, 149, 58, 0.25);
+      border-radius: var(--radius);
+      display: none;
+      animation: estFadeSlide 0.45s ease forwards;
+    }
+    .est-result.visible {
+      display: block;
+    }
+    @keyframes estFadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .est-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(184, 149, 58, 0.15);
+    }
+    .est-result-row:last-of-type {
+      border-bottom: none;
+    }
+    .est-result-row .label {
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+    }
+    .est-result-row .value {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+    .est-result-row .value.gold {
+      color: var(--color-accent);
+    }
+    .est-result-total {
+      margin-top: 0.8rem;
+      padding-top: 0.9rem;
+      border-top: 1.5px solid rgba(184, 149, 58, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .est-result-total .label {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-text);
+    }
+    .est-result-total .value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--color-accent);
+    }
+    .est-btn-group {
+      display: flex;
+      gap: 0.9rem;
+      margin-top: 1.3rem;
+      flex-wrap: wrap;
+    }
+    .est-btn-group .btn {
+      flex: 1;
+      min-width: 140px;
+      text-decoration: none;
+    }
+    .est-disclaimer {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      opacity: 0.7;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .estimator-box { padding: 1.6rem 1.3rem; }
+      .est-package-selector { grid-template-columns: repeat(2, 1fr); }
+      .est-btn-group { flex-direction: column; }
+      .est-result-total .value { font-size: 1.35rem; }
+    }
+
+    /* ============================================================
+       SERVICES
+       ============================================================ */
+    .services-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .services-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .services-header .left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-text);
+    }
+    .services-header .left h2 .gold { color: var(--color-accent); }
+    .services-header .left .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      display: inline-block;
+      margin-bottom: 0.2rem;
+    }
+    .services-header .see-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+    .services-header .see-all:hover {
+      border-bottom-color: var(--color-accent);
+      color: #a17e2e;
+    }
+    .services-header .see-all i {
+      font-size: 0.7rem;
+      transition: transform 0.25s ease;
+    }
+    .services-header .see-all:hover i {
+      transform: translateX(4px);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-card);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .service-card .image-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card .card-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .service-card:hover .card-image {
+      transform: scale(1.03);
+    }
+    .service-card .card-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .service-card .icon-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius);
+      background: var(--color-accent-soft);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.6rem;
+      transition: var(--transition);
+    }
+    .service-card:hover .icon-wrapper {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    .service-card:hover .icon-wrapper i { color: #fff; }
+    .service-card .icon-wrapper i {
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      transition: var(--transition);
+    }
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      font-weight: 350;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .service-card .know-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+      width: fit-content;
+    }
+    .service-card .know-more i {
+      font-size: 0.6rem;
+      transition: transform 0.25s ease;
+    }
+    .service-card .know-more:hover {
+      color: #a17e2e;
+    }
+    .service-card .know-more:hover i {
+      transform: translateX(4px);
+    }
+    @media (max-width: 768px) {
+      .services-header { flex-direction: column; align-items: flex-start; }
+      .services-header .see-all { align-self: flex-start; }
+      .services-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .service-card .card-image { height: 150px; }
+      .service-card .card-body { padding: 1.2rem; }
+    }
+
+    /* ============================================================
+       WHY US
+       ============================================================ */
+    .why-section {
+      background: var(--color-surface);
+      padding: 6rem 0;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2.5rem;
+    }
+    .why-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .why-card .icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--color-accent-soft);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      transition: var(--transition);
+    }
+    .why-card:hover .icon-wrapper {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    .why-card:hover .icon-wrapper i { color: #fff; }
+    .why-card .icon-wrapper i {
+      font-size: 1.3rem;
+      color: var(--color-accent);
+      transition: var(--transition);
+    }
+    .why-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--color-text);
+    }
+    .why-card p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      font-weight: 350;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       ABOUT US (Leadership removed)
+       ============================================================ */
     .about-section {
       background: var(--color-surface);
       border-top: 1px solid var(--color-border);
@@ -385,6 +1327,15 @@
       gap: 3rem;
       margin-top: 2.5rem;
       align-items: center;
+    }
+    .about-grid .about-text h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .about-grid .about-text h2 .gold {
+      color: var(--color-accent);
     }
     .about-grid .about-text p {
       color: var(--color-text-muted);
@@ -414,6 +1365,7 @@
       font-size: 0.75rem;
       color: var(--color-text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     .about-grid .about-image img {
       width: 100%;
@@ -421,53 +1373,8 @@
       border: 1px solid var(--color-border);
       display: block;
     }
-    .about-team {
-      margin-top: 4rem;
-      text-align: center;
-    }
-    .about-team .leaders {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .about-team .leader {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 1.8rem 1.5rem;
-      width: 200px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .about-team .leader:hover {
-      transform: translateY(-4px);
-      border-color: var(--color-accent);
-      box-shadow: var(--shadow-hover);
-    }
-    .about-team .leader .avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 0 auto 0.8rem;
-    }
-    .about-team .leader h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .about-team .leader .desig {
-      color: var(--color-accent);
-      font-weight: 500;
-      font-size: 0.85rem;
-    }
+
+    /* About Form */
     .about-form-wrapper {
       margin-top: 3rem;
       background: var(--color-bg);
@@ -518,7 +1425,7 @@
     .about-form-wrapper .form-group textarea:focus {
       outline: none;
       border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px rgba(184,149,58,0.10);
+      box-shadow: 0 0 0 3px rgba(184, 149, 58, 0.10);
     }
     .about-form-wrapper .form-group textarea {
       resize: vertical;
@@ -539,7 +1446,7 @@
     .about-form-wrapper .btn-submit:hover {
       background: #a17e2e;
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(184,149,58,0.20);
+      box-shadow: 0 4px 16px rgba(184, 149, 58, 0.20);
     }
     .about-form-wrapper .form-note {
       font-size: 0.7rem;
@@ -547,319 +1454,349 @@
       text-align: center;
       margin-top: 1rem;
     }
+
     @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .about-form-wrapper { padding: 1.6rem 1.2rem; }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .about-form-wrapper {
+        padding: 1.6rem 1.2rem;
+      }
     }
 
-    /* ===== PACKAGES ===== */
-    .package-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .package-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 2rem 1.8rem;
-      transition: var(--transition);
-      box-shadow: var(--shadow-card);
-    }
-    .package-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--color-accent);
-      box-shadow: var(--shadow-hover);
-    }
-    .package-card .pkg-name {
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-    .package-card .pkg-price {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--color-accent);
-    }
-    .package-card .pkg-price span {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--color-text-muted);
-    }
-    .package-card .pkg-desc {
-      font-size: 0.88rem;
-      color: var(--color-text-muted);
-      margin: 0.6rem 0 1rem;
-    }
-    .package-card .features-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1rem;
-    }
-    .package-card .features-list li {
-      padding: 0.2rem 0;
-      font-size: 0.82rem;
-      color: var(--color-text-muted);
-      padding-left: 1.2rem;
-      position: relative;
-      line-height: 1.5;
-    }
-    .package-card .features-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--color-accent);
-    }
-    .package-card .btn { width: 100%; margin-top: auto; }
-
-    /* ===== ESTIMATOR ===== */
-    .estimator-section {
-      background: var(--color-surface);
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .estimator-box {
-      max-width: 720px;
-      margin: 2.5rem auto 0;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 2.4rem 2.6rem;
-    }
-    .est-form-group { margin-bottom: 1.5rem; }
-    .est-package-selector {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.7rem;
-    }
-    .est-package-option {
-      background: var(--color-surface);
-      border: 1.5px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 0.9rem 0.7rem;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition);
-      color: var(--color-text-muted);
-    }
-    .est-package-option.active {
-      border-color: var(--color-accent);
-      background: var(--color-accent-soft);
-      color: var(--color-text);
-    }
-    .est-package-option .ep-name { font-weight: 700; font-size: 0.9rem; display: block; }
-    .est-package-option .ep-price { font-size: 0.78rem; color: var(--color-accent); display: block; }
-    .est-input {
-      width: 100%;
-      background: var(--color-surface);
-      border: 1.5px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 0.85rem 1.1rem;
-      font-size: 1rem;
-    }
-    .est-input:focus {
-      outline: none;
-      border-color: var(--color-accent);
-    }
-    .est-result {
-      margin-top: 1.8rem;
-      padding: 1.5rem;
-      background: var(--color-accent-soft);
-      border: 1px solid rgba(184,149,58,0.25);
-      border-radius: var(--radius);
-      display: none;
-    }
-    .est-result.visible { display: block; animation: fadeIn 0.4s ease; }
-    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
-    .est-result-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(184,149,58,0.15);
-    }
-    .est-result-total {
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1.5px solid rgba(184,149,58,0.3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .est-result-total .value { font-size: 1.5rem; font-weight: 800; color: var(--color-accent); }
-    .est-btn-group {
-      display: flex;
-      gap: 0.9rem;
-      margin-top: 1.3rem;
-      flex-wrap: wrap;
-    }
-    .est-btn-group .btn { flex: 1; min-width: 140px; }
-
-    /* ===== SERVICES ===== */
-    .services-section {
-      background: var(--color-surface);
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .service-card {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .service-card:hover { transform: translateY(-4px); border-color: var(--color-accent); box-shadow: var(--shadow-hover); }
-    .service-card .card-image {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .service-card .card-body { padding: 1.4rem; }
-    .service-card .icon-wrapper {
-      width: 42px;
-      height: 42px;
-      border-radius: var(--radius);
-      background: var(--color-accent-soft);
-      border: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.6rem;
-    }
-    .service-card .icon-wrapper i { color: var(--color-accent); font-size: 1.1rem; }
-    .service-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
-    .service-card p { font-size: 0.88rem; color: var(--color-text-muted); font-weight: 350; line-height: 1.6; }
-
-    /* ===== WHY US ===== */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .why-card {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 2rem 1.6rem;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .why-card:hover { transform: translateY(-4px); border-color: var(--color-accent); box-shadow: var(--shadow-hover); }
-    .why-card .icon-wrapper {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--color-accent-soft);
-      border: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.8rem;
-    }
-    .why-card .icon-wrapper i { font-size: 1.3rem; color: var(--color-accent); }
-    .why-card h3 { font-size: 1.05rem; font-weight: 600; }
-    .why-card p { font-size: 0.88rem; color: var(--color-text-muted); font-weight: 350; }
-
-    /* ===== TRUSTED ===== */
+    /* ============================================================
+       TRUSTED BY
+       ============================================================ */
     .trusted-section {
       background: var(--color-surface);
-      padding: 4rem 0;
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
     }
+    .trusted-section::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(184, 149, 58, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .trusted-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .trusted-header .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-accent-soft);
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      margin-bottom: 0.6rem;
+    }
+    .trusted-header .section-title {
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 0.2rem;
+    }
+    .trusted-header .section-title .gold { color: var(--color-accent); }
+    .trusted-header .title-underline {
+      width: 52px;
+      height: 2.5px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      margin: 0.6rem auto 0.8rem;
+    }
+    .trusted-header .section-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      font-weight: 350;
+      line-height: 1.7;
+    }
     .marquee-wrapper {
+      position: relative;
+      z-index: 2;
       overflow: hidden;
-      padding: 1rem 0;
-      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+      padding: 1.5rem 0;
+      margin: 0.5rem 0 2rem;
+      mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
     }
     .marquee-track {
       display: flex;
-      gap: 3rem;
+      gap: 4rem;
       width: max-content;
       animation: marqueeScroll 30s linear infinite;
     }
-    .marquee-track .logo-item { height: 60px; display: flex; align-items: center; }
-    .marquee-track .logo-item img { max-height: 40px; width: auto; object-fit: contain; }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-track .logo-item {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70px;
+      padding: 0 5px;
+      transition: transform 0.3s ease;
+      background: transparent;
+    }
+    .marquee-track .logo-item img {
+      max-height: 50px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: none !important;
+      opacity: 1 !important;
+      transition: transform 0.3s ease;
+    }
+    .marquee-track .logo-item:hover img { transform: scale(1.08); }
+    .marquee-track .logo-item .fallback-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
     @keyframes marqueeScroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
     .trusted-stats-bar {
       display: flex;
+      align-items: center;
       justify-content: center;
       gap: 2rem;
-      padding: 1.2rem;
+      padding: 1.5rem 2rem;
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
-      max-width: 600px;
-      margin: 1rem auto;
+      margin: 1rem auto 2.5rem;
+      max-width: 700px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      z-index: 2;
       flex-wrap: wrap;
     }
-    .stat-item .stat-number { font-size: 1.4rem; font-weight: 700; color: var(--color-accent); }
-    .stat-item .stat-label { font-size: 0.7rem; text-transform: uppercase; color: var(--color-text-muted); }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .stat-item .stat-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .stat-item .stat-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+    }
+    .stat-divider {
+      width: 1.5px;
+      height: 30px;
+      background: var(--color-border);
+      flex-shrink: 0;
+    }
+    .trusted-quote {
+      text-align: center;
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+      position: relative;
+      z-index: 2;
+    }
+    .trusted-quote i {
+      color: var(--color-accent);
+      font-size: 0.9rem;
+      opacity: 0.5;
+      margin-right: 0.4rem;
+    }
+    .trusted-quote blockquote {
+      font-size: 0.9rem;
+      font-weight: 350;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      font-style: italic;
+      display: inline;
+    }
+    .trusted-quote cite {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.75rem;
+      font-style: normal;
+      color: var(--color-text);
+      font-weight: 400;
+    }
+    .trusted-quote cite strong {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .trusted-section { padding: 3rem 0; }
+      .marquee-track { gap: 2.5rem; }
+      .marquee-track .logo-item { height: 54px; }
+      .marquee-track .logo-item img { max-height: 38px; }
+      .trusted-stats-bar { gap: 1rem; padding: 1rem 1.2rem; flex-wrap: wrap; }
+      .stat-item .stat-number { font-size: 1.3rem; }
+      .stat-divider { height: 24px; }
+      .trusted-quote blockquote { font-size: 0.8rem; }
+    }
 
-    /* ===== CLIENTS CAROUSEL ===== */
+    /* ============================================================
+       CLIENTS CAROUSEL
+       ============================================================ */
     .clients-carousel-section {
       background: var(--color-surface);
-      padding: 4rem 0;
+      padding: 6rem 0;
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .clients-carousel-section .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .clients-carousel-section .section-header .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-accent-soft);
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .clients-carousel-section .section-header h2 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+    .clients-carousel-section .section-header h2 span { color: var(--color-accent); }
+    .clients-carousel-section .section-header p {
+      font-size: 17px;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 400;
     }
     .clients-carousel-wrapper {
       position: relative;
+      width: 100%;
       overflow: hidden;
-      padding: 10px 0;
+      border-radius: 20px;
+      padding: 20px 0;
     }
     .clients-carousel-track {
       display: flex;
-      gap: 20px;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      gap: 24px;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
     }
     .client-carousel-card {
-      flex: 0 0 calc(25% - 15px);
+      flex-shrink: 0;
+      width: calc(25% - 18px);
       background: var(--color-bg);
-      border-radius: var(--radius);
+      border-radius: 16px;
+      overflow: hidden;
       border: 1px solid var(--color-border);
-      aspect-ratio: 1/1;
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow-card);
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
-    .client-carousel-card img { max-width: 80%; max-height: 80%; object-fit: contain; }
+    .client-carousel-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-accent);
+      box-shadow: 0 12px 40px rgba(184, 149, 58, 0.10);
+    }
+    .client-carousel-card img {
+      max-width: 85%;
+      max-height: 85%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: none !important;
+      opacity: 1 !important;
+      transition: transform 0.3s ease;
+    }
+    .client-carousel-card:hover img { transform: scale(1.04); }
+    .client-carousel-card .fallback-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-align: center;
+      line-height: 1.3;
+      word-break: break-word;
+      padding: 0.3rem;
+    }
     .clients-carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.92);
       border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      color: var(--color-text);
+      font-size: 1.2rem;
       cursor: pointer;
+      transition: all 0.3s ease;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
     }
-    .clients-carousel-btn:hover { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
-    .clients-carousel-btn.prev { left: 5px; }
-    .clients-carousel-btn.next { right: 5px; }
+    .clients-carousel-btn:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent);
+      color: #fff;
+      transform: translateY(-50%) scale(1.06);
+      box-shadow: 0 6px 24px rgba(184, 149, 58, 0.20);
+    }
+    .clients-carousel-btn:active { transform: translateY(-50%) scale(0.94); }
+    .clients-carousel-btn.prev { left: 8px; }
+    .clients-carousel-btn.next { right: 8px; }
     .clients-carousel-dots {
       display: flex;
       justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 28px;
     }
     .clients-carousel-dots .dot {
       width: 10px;
@@ -868,56 +1805,123 @@
       background: var(--color-border);
       border: none;
       cursor: pointer;
+      transition: all 0.4s ease;
       padding: 0;
-      transition: var(--transition);
     }
     .clients-carousel-dots .dot.active {
       background: var(--color-accent);
-      transform: scale(1.2);
+      box-shadow: 0 0 20px rgba(184, 149, 58, 0.25);
+      transform: scale(1.25);
+    }
+    .clients-carousel-dots .dot:hover {
+      background: var(--color-accent);
+      opacity: 0.6;
+    }
+    @media (max-width: 1024px) {
+      .client-carousel-card { width: calc(33.33% - 16px); }
     }
     @media (max-width: 768px) {
-      .client-carousel-card { flex: 0 0 calc(50% - 10px); }
+      .client-carousel-card { width: calc(50% - 12px); }
+      .clients-carousel-section .section-header h2 { font-size: 32px; }
+      .clients-carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+      .clients-carousel-btn.prev { left: 4px; }
+      .clients-carousel-btn.next { right: 4px; }
     }
     @media (max-width: 480px) {
-      .client-carousel-card { flex: 0 0 100%; }
+      .client-carousel-card { width: calc(100% - 0px); aspect-ratio: 1 / 1; }
     }
 
-    /* ===== GALLERY (marquee) ===== */
+    /* ============================================================
+       GALLERY
+       ============================================================ */
     .project-gallery-section {
       background: var(--color-surface);
-      padding: 4rem 0;
+      padding: 6rem 0;
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-gallery-section .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .project-gallery-section .section-header .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-accent-soft);
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .project-gallery-section .section-header h2 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+    .project-gallery-section .section-header h2 span { color: var(--color-accent); }
+    .project-gallery-section .section-header p {
+      font-size: 17px;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 400;
     }
     .gallery-marquee-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      width: 100%;
     }
     .gallery-marquee-row {
       overflow: hidden;
+      width: 100%;
+      position: relative;
+      padding: 6px 0;
       mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
     }
     .gallery-marquee-track {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       width: max-content;
     }
-    .gallery-marquee-row:nth-child(1) .gallery-marquee-track { animation: scroll-left 30s linear infinite; }
-    .gallery-marquee-row:nth-child(2) .gallery-marquee-track { animation: scroll-right 35s linear infinite; }
-    .gallery-marquee-row:nth-child(3) .gallery-marquee-track { animation: scroll-left 32s linear infinite; }
+    .gallery-marquee-row:nth-child(1) .gallery-marquee-track { animation: scroll-left 35s linear infinite; }
+    .gallery-marquee-row:nth-child(2) .gallery-marquee-track { animation: scroll-right 40s linear infinite; }
+    .gallery-marquee-row:nth-child(3) .gallery-marquee-track { animation: scroll-left 38s linear infinite; }
+    .gallery-marquee-row:hover .gallery-marquee-track { animation-play-state: paused; }
     .gallery-card {
-      flex: 0 0 180px;
+      flex-shrink: 0;
+      width: 200px;
+      background: transparent;
+      border: none;
+      border-radius: 14px;
       padding: 4px;
+      box-shadow: none;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
     }
+    .gallery-card:hover { transform: translateY(-4px); }
     .gallery-card .gallery-image {
       width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: var(--radius);
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
       object-fit: cover;
       display: block;
       background: #eaeaea;
+      transition: transform 0.4s ease;
     }
+    .gallery-card:hover .gallery-image { transform: scale(1.03); }
     @keyframes scroll-left {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -926,78 +1930,146 @@
       0% { transform: translateX(-50%); }
       100% { transform: translateX(0); }
     }
-    @media (max-width: 768px) { .gallery-card { flex: 0 0 140px; } }
-    @media (max-width: 480px) { .gallery-card { flex: 0 0 100px; } }
+    @media (max-width: 1024px) {
+      .gallery-card { width: 170px; padding: 3px; }
+      .gallery-card .gallery-image { border-radius: 12px; }
+      .gallery-marquee-row { padding: 4px 0; }
+      .gallery-marquee-wrapper { gap: 8px; }
+      .gallery-marquee-track { gap: 12px; }
+    }
+    @media (max-width: 768px) {
+      .project-gallery-section .section-header h2 { font-size: 32px; }
+      .gallery-card { width: 140px; padding: 3px; }
+      .gallery-card .gallery-image { border-radius: 10px; }
+      .gallery-marquee-track { gap: 10px; }
+      .gallery-marquee-wrapper { gap: 6px; }
+    }
+    @media (max-width: 480px) {
+      .gallery-card { width: 120px; padding: 2px; }
+      .gallery-card .gallery-image { border-radius: 8px; }
+    }
 
-    /* ===== SHOWCASE ===== */
+    /* ============================================================
+       VIDEO SHOWCASE
+       ============================================================ */
     .showcase-section {
       background: var(--color-surface);
       padding: 4rem 0;
       border-bottom: 1px solid var(--color-border);
     }
+    .showcase-wrapper {
+      position: relative;
+      margin-top: 2rem;
+      overflow: hidden;
+    }
     .showcase-track-container {
       overflow: hidden;
       border-radius: var(--radius);
+      padding: 0.25rem 0;
     }
     .showcase-track {
       display: flex;
-      gap: 1rem;
-      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+      gap: 1.2rem;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
     }
     .showcase-item {
-      flex: 0 0 calc(25% - 0.75rem);
-      aspect-ratio: 16/9;
+      flex: 0 0 calc(25% - 0.9rem);
+      min-width: 0;
       border-radius: var(--radius);
       overflow: hidden;
-      position: relative;
       cursor: pointer;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--color-bg);
       border: 1px solid var(--color-border);
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
     }
-    .showcase-item img { width: 100%; height: 100%; object-fit: cover; }
+    .showcase-item:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-hover);
+    }
+    .showcase-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .showcase-item:hover img { transform: scale(1.05); }
     .showcase-item .play-overlay {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.25);
+      transition: background 0.3s ease;
+      pointer-events: none;
     }
-    .showcase-item .play-overlay i { font-size: 2.8rem; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .showcase-item:hover .play-overlay { background: rgba(0, 0, 0, 0.35); }
+    .showcase-item .play-overlay i {
+      font-size: 3.2rem;
+      color: #fff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+    .showcase-item:hover .play-overlay i { transform: scale(1.10); }
     .showcase-item .video-title {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 0.6rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.70) 0%, transparent 100%);
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      pointer-events: none;
     }
     .showcase-nav {
       display: flex;
       justify-content: center;
-      gap: 0.8rem;
-      margin-top: 1.5rem;
+      gap: 0.6rem;
+      margin-top: 1.8rem;
     }
     .showcase-nav button {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 1px solid var(--color-border);
+      border: 1.5px solid var(--color-border);
       background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 0.9rem;
       cursor: pointer;
       transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-card);
     }
     .showcase-nav button:hover {
       border-color: var(--color-accent);
       background: var(--color-accent);
       color: #fff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .showcase-nav button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
     }
     .showcase-dots {
       display: flex;
       justify-content: center;
       gap: 0.5rem;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
     }
     .showcase-dots .dot {
       width: 8px;
@@ -1006,169 +2078,360 @@
       background: var(--color-border);
       border: none;
       cursor: pointer;
-      padding: 0;
       transition: var(--transition);
+      padding: 0;
     }
     .showcase-dots .dot.active {
       background: var(--color-accent);
-      width: 20px;
+      width: 22px;
       border-radius: 4px;
     }
+    .showcase-dots .dot:hover { background: var(--color-accent-soft); }
     @media (max-width: 1024px) {
-      .showcase-item { flex: 0 0 calc(33.33% - 0.66rem); }
+      .showcase-item { flex: 0 0 calc(33.33% - 0.8rem); }
     }
     @media (max-width: 768px) {
-      .showcase-item { flex: 0 0 calc(50% - 0.5rem); }
+      .showcase-item { flex: 0 0 calc(50% - 0.6rem); }
+      .showcase-item .play-overlay i { font-size: 2.4rem; }
+      .showcase-item .video-title { font-size: 0.65rem; padding: 0.5rem 0.7rem; }
     }
     @media (max-width: 480px) {
       .showcase-item { flex: 0 0 100%; }
+      .showcase-item .play-overlay i { font-size: 2rem; }
+      .showcase-nav button { width: 34px; height: 34px; font-size: 0.75rem; }
     }
 
-    /* ===== PARTNERS ===== */
+    /* VIDEO MODAL */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .video-modal.open {
+      display: flex;
+      opacity: 1;
+    }
+    .video-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+      transform: scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .video-modal.open .video-modal-content { transform: scale(1); }
+    .video-modal-content .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-modal-content .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 0.4rem;
+      transition: var(--transition);
+      opacity: 0.7;
+      z-index: 10;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal-close:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+
+    /* ============================================================
+       PARTNERS
+       ============================================================ */
     .partners-section {
       background: var(--color-surface);
       padding: 4rem 0;
       border-bottom: 1px solid var(--color-border);
     }
     .carousel-wrapper {
+      position: relative;
       overflow: hidden;
-      padding: 1rem 0;
+      padding: 1.2rem 0;
+      margin-top: 1.8rem;
     }
     .carousel-track {
       display: flex;
       gap: 2rem;
+      animation: scroll 26s linear infinite;
       width: max-content;
-      animation: scroll-partners 25s linear infinite;
     }
+    .carousel-track:hover { animation-play-state: paused; }
     .carousel-item {
       flex: 0 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 140px;
-      padding: 0.8rem 1.5rem;
+      min-width: 150px;
+      padding: 1rem 1.8rem;
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
     }
-    .carousel-item img { max-height: 40px; width: auto; object-fit: contain; }
-    @keyframes scroll-partners {
+    .carousel-item:hover {
+      border-color: var(--color-accent);
+      transform: scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+    .carousel-item img {
+      max-height: 44px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.6;
+      transition: var(--transition);
+    }
+    .carousel-item:hover img { opacity: 1; }
+    .carousel-item .fallback-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+    @media (max-width: 768px) {
+      .carousel-item { min-width: 110px; padding: 0.7rem 1rem; }
+      .carousel-item img { max-height: 34px; }
+      .carousel-track { gap: 1.2rem; }
+    }
 
-    /* ===== CONTACT ===== */
+    /* ============================================================
+       CONTACT / CTA
+       ============================================================ */
     .contact-section {
-      padding: 3rem 0;
+      padding: 3rem 0 4rem;
       background: var(--color-bg);
     }
     .contact-card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
-      padding: 2.5rem;
+      padding: 3rem 2.5rem;
       text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .contact-card h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--color-text);
+    }
+    .contact-card h2 .gold { color: var(--color-accent); }
+    .contact-card p {
+      color: var(--color-text-muted);
+      font-weight: 350;
+      max-width: 480px;
+      margin: 0 auto 1.8rem;
     }
     .contact-card .phone {
       font-size: 1.2rem;
       font-weight: 600;
       color: var(--color-accent);
-      margin-top: 1rem;
+      margin-top: 1.2rem;
+    }
+    .contact-card .phone i {
+      opacity: 0.5;
+      margin-right: 0.5rem;
     }
     .contact-card .btn-group {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
       justify-content: center;
-      margin-top: 1.5rem;
     }
 
-    /* ===== FOOTER ===== */
+    /* ============================================================
+       FOOTER
+       ============================================================ */
     .footer {
       background: #0b1a2e;
       color: #e2e8f0;
-      padding: 40px 20px 20px;
+      padding: 50px 20px 20px;
       border-top: 4px solid var(--color-accent);
     }
-    .footer-container { max-width: 1280px; margin: 0 auto; }
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 30px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 30px 20px;
+      margin-bottom: 40px;
     }
     .footer-col h4 {
-      color: #fff;
+      color: #ffffff;
       font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+      margin-bottom: 18px;
       position: relative;
+      padding-bottom: 8px;
     }
     .footer-col h4::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: -4px;
-      width: 30px;
-      height: 2px;
+      bottom: 0;
+      width: 32px;
+      height: 2.5px;
       background: var(--color-accent);
-      border-radius: 2px;
+      border-radius: 4px;
     }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
     .footer-col ul li a {
       color: #cbd5e1;
       text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      display: inline-block;
     }
-    .footer-col ul li a:hover { color: #fbbf24; }
+    .footer-col ul li a:hover {
+      color: #fbbf24;
+    }
+    .footer-col.contact-col h4::after {
+      background: var(--color-accent);
+    }
+    .contact-info {
+      margin-top: 6px;
+    }
     .contact-info .contact-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       color: #cbd5e1;
       font-size: 0.9rem;
     }
-    .contact-info .contact-item i { width: 20px; color: var(--color-accent); }
+    .contact-info .contact-item i {
+      width: 20px;
+      color: var(--color-accent);
+      font-size: 1rem;
+      text-align: center;
+    }
+    .contact-info .contact-item a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-info .contact-item a:hover {
+      color: #fbbf24;
+    }
+    .contact-info .address-block {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
     .footer-cities {
       border-top: 1px solid #1e3a5a;
       border-bottom: 1px solid #1e3a5a;
-      padding: 20px 0;
+      padding: 22px 0 20px;
       margin-bottom: 30px;
     }
     .footer-cities .cities-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px 12px;
+      gap: 4px 14px;
       justify-content: center;
     }
     .footer-cities .cities-row a {
       color: #94a3b8;
       text-decoration: none;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       transition: color 0.2s;
+      white-space: nowrap;
     }
-    .footer-cities .cities-row a:hover { color: #fbbf24; }
+    .footer-cities .cities-row a:hover {
+      color: #fbbf24;
+    }
     .footer-cities .cities-row .city-label {
       color: #64748b;
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 2px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .footer-cities .cities-row .city-label::after {
+      content: '›';
+      margin-left: 4px;
+      color: var(--color-accent);
+      font-weight: 300;
+    }
+    .footer-cities .divider-dot {
+      color: #334155;
+      font-size: 0.5rem;
+      display: inline-flex;
+      align-items: center;
     }
     .footer-bottom {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 18px 30px;
       padding-top: 18px;
     }
-    .footer-bottom .copyright { font-size: 0.8rem; color: #94a3b8; }
+    .footer-bottom .copyright {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      order: 2;
+    }
+    .footer-bottom .copyright span {
+      color: #64748b;
+    }
     .app-links {
       display: flex;
+      align-items: center;
       gap: 14px;
+      order: 1;
     }
     .app-links a {
       display: inline-flex;
@@ -1176,110 +2439,225 @@
       gap: 8px;
       background: #1e3a5a;
       color: #e2e8f0;
-      padding: 6px 16px;
+      padding: 8px 18px 8px 14px;
       border-radius: 8px;
+      text-decoration: none;
       font-size: 0.8rem;
       font-weight: 500;
-      transition: background 0.2s;
+      transition: background 0.25s, transform 0.15s;
+      border: 1px solid transparent;
     }
-    .app-links a:hover { background: #2a4a6a; }
-    .app-links a i { font-size: 1.2rem; color: var(--color-accent); }
+    .app-links a i {
+      font-size: 1.3rem;
+      color: var(--color-accent);
+    }
+    .app-links a:hover {
+      background: #2a4a6a;
+      transform: translateY(-2px);
+      border-color: rgba(184, 149, 58, 0.25);
+    }
+    .app-links a .app-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .app-links a .app-text small {
+      font-weight: 300;
+      font-size: 0.6rem;
+      opacity: 0.8;
+    }
     @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+      }
+      .footer-col.contact-col {
+        grid-column: 1 / -1;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .footer-bottom .copyright { order: 2; }
+      .app-links { order: 1; flex-wrap: wrap; justify-content: center; }
+      .footer-cities .cities-row { gap: 3px 10px; }
+      .footer-cities .cities-row a { font-size: 0.7rem; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 12px;
+      }
+      .footer-col h4 { font-size: 0.85rem; }
+      .footer-col ul li a { font-size: 0.8rem; }
+      .app-links a {
+        padding: 6px 14px 6px 12px;
+        font-size: 0.7rem;
+      }
+      .app-links a i { font-size: 1rem; }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
+  <!-- SKIP LINK -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" id="mainHeader" role="banner">
     <div class="header-container">
-      <a href="#" class="brand">
+      <a href="#" class="brand" aria-label="BigLand Construction Home">
         <span class="logo-icon"><i class="fas fa-crown"></i></span>
-        <span class="logo-text">Bigland<span>Construction</span></span>
+        <div class="logo-text">
+          BigLand
+          <span class="logo-sub">Construction</span>
+        </div>
       </a>
+
       <ul class="nav-menu" id="navMenu">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#packages">Packages</a></li>
         <li><a href="#estimator">Estimator</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#why-us">Why Us</a></li>
-        <li><a href="#trusted">Trusted</a></li>
-        <li><a href="#clients">Clients</a></li>
         <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#showcase">Showcase</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact" class="btn-cta">Get Started</a></li>
+        <li>
+          <button class="more-btn" id="moreBtn" aria-label="More pages" aria-expanded="false">
+            More <i class="fas fa-chevron-down"></i>
+          </button>
+        </li>
+        <li><a href="tel:+918409637705" class="nav-phone"><i class="fas fa-phone-alt"></i> Call Now</a></li>
+        <li><a href="#contact" class="btn-cta"><i class="fas fa-hard-hat"></i> Get Started</a></li>
       </ul>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- ===== MAIN ===== -->
-  <main>
+  <!-- MODAL (More) -->
+  <div class="modal-overlay" id="moreModal" role="dialog" aria-modal="true" aria-label="More options">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Close popup">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-get-started-heading">
+        <i class="fas fa-th-large"></i> EXPLORE MORE
+      </div>
+      <div class="modal-feature-grid">
+        <a href="#why-us" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-shield-alt"></i></span>
+          <h4>Why Choose Us</h4>
+          <p>10-year warranty &amp; transparent processes.</p>
+        </a>
+        <a href="#trusted" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-handshake"></i></span>
+          <h4>Trusted By</h4>
+          <p>50+ leading brands trust BigLand.</p>
+        </a>
+        <a href="#clients" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-users"></i></span>
+          <h4>Our Clients</h4>
+          <p>Happy homeowners across 3 states.</p>
+        </a>
+        <a href="#showcase" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-play-circle"></i></span>
+          <h4>Video Showcase</h4>
+          <p>Watch our projects come to life.</p>
+        </a>
+        <a href="#partners" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-building"></i></span>
+          <h4>Our Partners</h4>
+          <p>Premium material &amp; finance partners.</p>
+        </a>
+        <a href="#contact" class="modal-feature-card">
+          <span class="icon"><i class="fas fa-headset"></i></span>
+          <h4>Contact Us</h4>
+          <p>Talk to our construction experts today.</p>
+        </a>
+      </div>
+      <div class="modal-resources-section">
+        <span class="res-title"><i class="fas fa-book-open"></i> RESOURCES</span>
+        <div class="res-links">
+          <a href="#estimator"><i class="fas fa-calculator"></i> Free Cost Estimator <span class="free-badge">FREE</span></a>
+          <a href="#"><i class="fas fa-newspaper"></i> Home Construction Guide</a>
+          <a href="#clients"><i class="fas fa-star"></i> Client Testimonials</a>
+          <a href="#"><i class="fas fa-bullhorn"></i> News &amp; Media</a>
+          <a href="#"><i class="fas fa-user-friends"></i> Refer a Friend</a>
+        </div>
+      </div>
+      <div class="modal-bottom">
+        <i class="fas fa-crown" style="color:var(--color-accent); margin-right:8px;"></i>
+        <strong>BigLand Construction</strong> &nbsp;<span class="gold">· Premium Builders Since 2017</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- HERO -->
-    <section id="home" class="hero-banner">
-      <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1781864169/Construct_Your_Dream_Home_10_q0l87a.png" alt="Luxury home" class="bg-image" />
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main">
+
+    <!-- HERO BANNER -->
+    <section id="home" class="hero-banner" aria-labelledby="hero-title">
+      <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1781864169/Construct_Your_Dream_Home_10_q0l87a.png" alt="Luxury home entrance with warm golden hour lighting" class="bg-image" fetchpriority="high" decoding="async" loading="eager" />
       <div class="overlay"></div>
       <div class="container">
-        <div class="hero-content">
-          <div class="sub-title"><i class="fas fa-crown"></i> Premium Home Construction</div>
-          <h1>Construct Your <strong>Dream Home</strong> With BigLand</h1>
-          <p>Experience world-class luxury construction with premium materials, transparent processes, and a 10-year warranty.</p>
+        <div class="hero-content motion-fade-up">
+          <div class="sub-title"><i class="fas fa-crown" aria-hidden="true"></i> Premium Home Construction</div>
+          <h1 id="hero-title">Construct Your <strong>Dream Home</strong> With BigLand Construction</h1>
+          <p>Experience world-class luxury construction with premium materials, transparent processes, and a 10-year warranty. Your vision, built with precision.</p>
           <div class="btn-group">
             <a href="#estimator"><button class="btn btn-primary"><i class="fas fa-calculator"></i> Get Free Estimate</button></a>
             <a href="#packages"><button class="btn btn-outline">Explore Packages</button></a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="number">20Lakhs+</span><span class="label">Sq. Ft.</span></div>
+            <div class="stat"><span class="number">20Lakhs+</span><span class="label">Sq. Ft. Constructed</span></div>
             <div class="stat"><span class="number">470+</span><span class="label">Quality Checks</span></div>
-            <div class="stat"><span class="number">11+</span><span class="label">Years</span></div>
+            <div class="stat"><span class="number">11+</span><span class="label">Years Experience</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT (with Form) -->
-    <section id="about" class="about-section">
+    <!-- ABOUT US (Leadership removed) -->
+    <section id="about" class="about-section" aria-labelledby="about-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">About Us</span>
-          <h2 class="section-title">Building Trust, <span class="gold">One Home</span> at a Time</h2>
-          <div class="gold-divider"></div>
+          <h2 class="section-title" id="about-title">Building Trust, <span class="gold">One Home</span> at a Time</h2>
+          <div class="gold-divider centered"></div>
         </div>
+
         <div class="about-grid">
-          <div class="about-text">
+          <div class="about-text motion-fade-up">
             <p>BigLand Construction was founded with a simple belief: every family deserves a home built with integrity, quality, and care. Over the past 11 years, we've delivered over 2,000 homes across India, earning the trust of thousands of families.</p>
             <p>Our approach combines traditional craftsmanship with modern technology, ensuring every project is completed on time, within budget, and to the highest standards. We are a team of passionate architects, engineers, and project managers who treat every home as if it were our own.</p>
-            <div class="about-stats">
-              <div class="stat"><span class="num">11+</span><span class="label">Years</span></div>
-              <div class="stat"><span class="num">2,000+</span><span class="label">Homes</span></div>
-              <div class="stat"><span class="num">98%</span><span class="label">Satisfaction</span></div>
-              <div class="stat"><span class="num">50+</span><span class="label">Brands</span></div>
+            <div class="about-stats stagger-children">
+              <div class="stat"><span class="num">11+</span><span class="label">Years of Excellence</span></div>
+              <div class="stat"><span class="num">2,000+</span><span class="label">Homes Built</span></div>
+              <div class="stat"><span class="num">98%</span><span class="label">Client Satisfaction</span></div>
+              <div class="stat"><span class="num">50+</span><span class="label">Trusted Brands</span></div>
             </div>
           </div>
-          <div class="about-image">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Construction team" />
+          <div class="about-image motion-fade-up">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Team working on construction site" loading="lazy" />
           </div>
         </div>
 
-        <div class="about-team">
-          <h2 class="section-title">Meet Our <span class="gold">Leadership</span></h2>
-          <div class="leaders">
-            <div class="leader"><div class="avatar">RS</div><h4>Rahul Sharma</h4><p class="desig">Founder &amp; CEO</p></div>
-            <div class="leader"><div class="avatar">PS</div><h4>Priya Singh</h4><p class="desig">Co-Founder &amp; COO</p></div>
-            <div class="leader"><div class="avatar">AK</div><h4>Amit Kumar</h4><p class="desig">Head of Projects</p></div>
-          </div>
-        </div>
-
-        <!-- Google Form Connected Form -->
-        <div class="about-form-wrapper">
+        <!-- About Form -->
+        <div class="about-form-wrapper motion-fade-up">
           <h3>Get in Touch with Our Team</h3>
           <p class="form-sub">Fill in your details and we'll get back to you within 24 hours.</p>
           <form action="https://docs.google.com/forms/d/e/1FAIpQLSdWoQtiY2YOsNsRzOg1Bgo4xweKs-1FXKANody1wHRQTGAHTQ/formResponse" method="POST" target="_blank">
@@ -1316,246 +2694,715 @@
     </section>
 
     <!-- PACKAGES -->
-    <section id="packages">
+    <section id="packages" aria-labelledby="packages-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">Our Packages</span>
-          <h2 class="section-title">Choose Your <span class="gold">Construction</span> Plan</h2>
+          <h2 class="section-title" id="packages-title">Choose Your <span class="gold">Construction</span> Plan</h2>
           <p class="section-desc centered">Premium packages designed to match your vision, budget, and lifestyle.</p>
-          <div class="gold-divider"></div>
+          <div class="gold-divider centered"></div>
         </div>
-        <div class="package-grid">
-          <div class="package-card">
+
+        <div class="package-grid stagger-children">
+          <div class="package-card" data-delay="0">
             <h3 class="pkg-name">Basic</h3>
             <div class="pkg-price">₹1950 <span>per sqft</span></div>
-            <p class="pkg-desc">Budget-friendly with trusted brands.</p>
-            <ul class="features-list"><li>Standard steel &amp; cement</li><li>Floor tiles upto ₹50/sqft</li><li>Standard flush doors</li></ul>
-            <button class="btn btn-outline">Learn More</button>
+            <p class="pkg-desc">A budget package with no compromise on quality that includes all construction essentials</p>
+            <div class="highlights-label">Highlights</div>
+            <ul class="features-list">
+              <li>Trusted brand steel &amp; cement</li>
+              <li>Standard floor tiles upto ₹50/sqft</li>
+              <li>Standard flush doors and window finish</li>
+              <li>Tractor Emulsion finish</li>
+              <li>Essential kitchen &amp; bathroom fittings</li>
+            </ul>
+            <div class="brand-logos">
+              <span class="brand gold">SUNVIK&reg;</span>
+              <span class="brand">Dalma</span>
+              <span class="brand">CERA</span>
+            </div>
+            <button class="btn btn-outline" data-package="Basic">Learn More <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="package-card">
+
+          <div class="package-card" data-delay="1">
+            <span class="popular-badge"><i class="fas fa-star"></i> Best Seller</span>
             <h3 class="pkg-name">Classic</h3>
             <div class="pkg-price">₹2080 <span>per sqft</span></div>
-            <p class="pkg-desc">Best seller – upgraded brands.</p>
-            <ul class="features-list"><li>Jindal Steel &amp; Power</li><li>Floor tiles upto ₹100/sqft</li><li>Teak doors</li></ul>
-            <button class="btn btn-primary">Learn More</button>
+            <p class="pkg-desc">Our best seller package with upgraded brands like Jindal Steels, Hindware etc at a considerable price</p>
+            <div class="highlights-label">Highlights</div>
+            <ul class="features-list">
+              <li>Superior brand steel &amp; cement</li>
+              <li>Refined floor tiles upto ₹100/sqft</li>
+              <li>Elegant teak doors and window finish</li>
+              <li>Tractor Shyne Emulsion finish</li>
+              <li>Stylish kitchen &amp; bathroom</li>
+            </ul>
+            <div class="brand-logos">
+              <span class="brand gold">JINDAL STEEL &amp; POWER</span>
+              <span class="brand">Dalma</span>
+              <span class="brand">O</span>
+              <span class="brand">handware</span>
+            </div>
+            <button class="btn btn-primary" data-package="Classic">Learn More <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="package-card">
+
+          <div class="package-card" data-delay="2">
             <h3 class="pkg-name">Premium</h3>
             <div class="pkg-price">₹2410 <span>per sqft</span></div>
-            <p class="pkg-desc">Modern living with extra provisions.</p>
-            <ul class="features-list"><li>Superior steel &amp; cement</li><li>Floor tiles upto ₹140/sqft</li><li>Designer teak doors</li></ul>
-            <button class="btn btn-outline">Learn More</button>
+            <p class="pkg-desc">An elegant package crafted for modern living with extra provisions like solar heater setup, puja room door etc</p>
+            <div class="highlights-label">Highlights</div>
+            <ul class="features-list">
+              <li>Superior Brand steel &amp; cement</li>
+              <li>Premium floor tiles upto ₹140/sqft</li>
+              <li>Designer teak doors and window finish</li>
+              <li>Apcolite Premium finish</li>
+              <li>Quality kitchen &amp; bathroom</li>
+            </ul>
+            <div class="brand-logos">
+              <span class="brand gold">JINDAL STEEL &amp; POWER</span>
+              <span class="brand">Dalma</span>
+              <span class="brand">O</span>
+              <span class="brand">handware</span>
+            </div>
+            <button class="btn btn-outline" data-package="Premium">Learn More <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="package-card">
+
+          <div class="package-card" data-delay="3">
             <h3 class="pkg-name">Royale</h3>
             <div class="pkg-price">₹2650 <span>per sqft</span></div>
-            <p class="pkg-desc">Ultimate plan with high-end finishes.</p>
-            <ul class="features-list"><li>EV charging, copper gas</li><li>Floor tiles upto ₹160/sqft</li><li>Apex Ultima exterior</li></ul>
-            <button class="btn btn-outline">Learn More</button>
+            <p class="pkg-desc">An ultimate plan with high-end finishes with amenities like EV charging, copper gas connection etc</p>
+            <div class="highlights-label">Highlights</div>
+            <ul class="features-list">
+              <li>Superior brand steel &amp; cement</li>
+              <li>Lavish floor tiles upto ₹160/sqft</li>
+              <li>Designer teak doors and window finish</li>
+              <li>Apex Ultima Exterior finish</li>
+              <li>Lavish Fittings for kitchen &amp; bathroom</li>
+            </ul>
+            <div class="brand-logos">
+              <span class="brand gold">JINDAL STEEL &amp; POWER</span>
+              <span class="brand">Dalma</span>
+              <span class="brand">O</span>
+              <span class="brand">handware</span>
+            </div>
+            <button class="btn btn-outline" data-package="Royale">Learn More <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ESTIMATOR -->
-    <section id="estimator" class="estimator-section">
+    <!-- COST ESTIMATOR -->
+    <section id="estimator" class="estimator-section" aria-labelledby="estimator-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">Instant Calculator</span>
-          <h2 class="section-title">Get Your <span class="gold">Cost Estimate</span></h2>
-          <p class="section-desc centered">Pick a package, enter area, get instant ballpark.</p>
-          <div class="gold-divider"></div>
+          <h2 class="section-title" id="estimator-title">Get Your <span class="gold">Cost Estimate</span></h2>
+          <p class="section-desc centered">Pick a package, enter your built-up area, and see an instant ballpark cost — right here on the page.</p>
+          <div class="gold-divider centered"></div>
         </div>
-        <div class="estimator-box">
-          <form id="estimateForm">
+
+        <div class="estimator-box motion-fade-up">
+          <form id="estimateForm" novalidate>
             <div class="est-form-group">
-              <label>Package</label>
-              <div class="est-package-selector" id="estPackageSelect">
-                <div class="est-package-option active" data-package="Basic" data-price="1950"><span class="ep-name">Basic</span><span class="ep-price">₹1,950/sqft</span></div>
-                <div class="est-package-option" data-package="Classic" data-price="2080"><span class="ep-name">Classic</span><span class="ep-price">₹2,080/sqft</span></div>
-                <div class="est-package-option" data-package="Premium" data-price="2410"><span class="ep-name">Premium</span><span class="ep-price">₹2,410/sqft</span></div>
-                <div class="est-package-option" data-package="Royale" data-price="2650"><span class="ep-name">Royale</span><span class="ep-price">₹2,650/sqft</span></div>
+              <label for="estPackageSelect">Select package <span class="req">*</span></label>
+              <div class="est-package-selector" id="estPackageSelect" role="radiogroup" aria-label="Construction packages">
+                <div class="est-package-option active" data-package="Basic" data-price="1950" role="radio" aria-checked="true" tabindex="0">
+                  <span class="ep-name">Basic</span>
+                  <span class="ep-price">₹1,950/sqft</span>
+                </div>
+                <div class="est-package-option" data-package="Classic" data-price="2080" role="radio" aria-checked="false" tabindex="0">
+                  <span class="ep-name">Classic</span>
+                  <span class="ep-price">₹2,080/sqft</span>
+                  <span class="ep-badge">Popular</span>
+                </div>
+                <div class="est-package-option" data-package="Premium" data-price="2410" role="radio" aria-checked="false" tabindex="0">
+                  <span class="ep-name">Premium</span>
+                  <span class="ep-price">₹2,410/sqft</span>
+                </div>
+                <div class="est-package-option" data-package="Royale" data-price="2650" role="radio" aria-checked="false" tabindex="0">
+                  <span class="ep-name">Royale</span>
+                  <span class="ep-price">₹2,650/sqft</span>
+                </div>
               </div>
+              <div class="est-error" id="estPackageError">Please select a package.</div>
             </div>
+
             <div class="est-form-group">
-              <label>Total built-up area</label>
-              <input type="number" id="estAreaInput" class="est-input" placeholder="e.g. 1200" min="100" step="10" value="1200" />
+              <label for="estAreaInput">Total built-up area <span class="req">*</span></label>
+              <div class="est-area-group">
+                <input type="number" id="estAreaInput" class="est-input" placeholder="e.g. 1200" min="100" step="10" value="1200" aria-describedby="estAreaHelp" />
+                <span class="est-unit">sq. ft.</span>
+              </div>
+              <div class="est-error" id="estAreaError">Please enter a valid area (min 100 sqft).</div>
+              <div id="estAreaHelp" class="est-help">Enter the total built-up area you're planning to construct.</div>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-calculator"></i> Calculate</button>
+
+            <button type="submit" class="btn btn-primary est-calc-btn" id="estCalculateBtn">
+              <i class="fas fa-calculator"></i> Calculate Estimate
+            </button>
           </form>
-          <div class="est-result" id="estResultPanel">
-            <div class="est-result-row"><span>Package</span><span id="estResultPackage">Basic</span></div>
-            <div class="est-result-row"><span>Area</span><span id="estResultArea">1,200 sqft</span></div>
-            <div class="est-result-row"><span>Rate</span><span id="estResultRate">₹1,950</span></div>
-            <div class="est-result-total"><span>Estimated Cost</span><span id="estResultTotal">₹23,40,000</span></div>
-            <div class="est-btn-group">
-              <button type="button" class="btn btn-outline" id="estResetBtn">Reset</button>
-              <a href="tel:+918409637705" class="btn btn-primary">Get Quote</a>
+
+          <div class="est-result" id="estResultPanel" role="region" aria-live="polite" aria-atomic="true">
+            <div class="est-result-row">
+              <span class="label">Package</span>
+              <span class="value" id="estResultPackage">Basic</span>
             </div>
+            <div class="est-result-row">
+              <span class="label">Area</span>
+              <span class="value" id="estResultArea">1,200 sqft</span>
+            </div>
+            <div class="est-result-row">
+              <span class="label">Rate per sqft</span>
+              <span class="value gold" id="estResultRate">₹1,950</span>
+            </div>
+            <div class="est-result-total">
+              <span class="label">Estimated Cost</span>
+              <span class="value" id="estResultTotal">₹23,40,000</span>
+            </div>
+            <div class="est-btn-group">
+              <button type="button" class="btn btn-outline" id="estResetBtn"><i class="fas fa-redo"></i> Reset</button>
+              <a href="tel:+918409637705" class="btn btn-primary" id="estContactCta"><i class="fas fa-phone-alt"></i> Get Detailed Quote</a>
+            </div>
+            <p class="est-disclaimer">* This is an indicative estimate. Final cost may vary based on site conditions and customisations.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section id="services" class="services-section">
+    <section id="services" class="services-section" aria-labelledby="services-title">
       <div class="container">
-        <div class="text-center">
-          <span class="section-label">What We Do</span>
-          <h2 class="section-title">Services <span class="gold">We Offer</span></h2>
-          <div class="gold-divider"></div>
+        <div class="services-header motion-fade-up">
+          <div class="left">
+            <span class="section-label">What We Do</span>
+            <h2 id="services-title">Services <span class="gold">We Offer</span></h2>
+            <div class="gold-divider" style="margin-top:0.2rem;"></div>
+          </div>
+          <button class="see-all" aria-label="See all services">
+            See All Services <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
-        <div class="services-grid">
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_ro8y81ro8y81ro8y_ceedsy.png" alt="Interiors" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-paint-roller"></i></div><h3>Interiors</h3><p>Tailored interior design that reflects your style.</p></div></div>
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_27_PM_l5y1vf.png" alt="Commercial" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-building"></i></div><h3>Commercial</h3><p>High‑quality commercial spaces for businesses.</p></div></div>
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209933/Gemini_Generated_Image_dxohrodxohrodxoh_1_fhidtq.png" alt="Architecture" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-drafting-compass"></i></div><h3>Architecture</h3><p>Expert planning and design for your dream project.</p></div></div>
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200609/imgi_38_7_1_jwx7no.png" alt="Residential" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-home"></i></div><h3>Residential</h3><p>Custom homes built with precision and care.</p></div></div>
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_21_PM_c2beun.png" alt="Renovation" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-hammer"></i></div><h3>Renovation</h3><p>Transform your existing space with expert renovation.</p></div></div>
-          <div class="service-card"><img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_hyw4lphyw4lphyw4_r8b25p.png" alt="Contractor" class="card-image" /><div class="card-body"><div class="icon-wrapper"><i class="fas fa-hard-hat"></i></div><h3>Contractor</h3><p>On‑site project management and execution.</p></div></div>
+
+        <div class="services-grid stagger-children">
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_ro8y81ro8y81ro8y_ceedsy.png" alt="Interiors" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-paint-roller"></i></div>
+              <h3>Interiors</h3>
+              <p>Right before moving in, we make your house a home with our top-notch interior design service, tailored to your unique style.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_27_PM_l5y1vf.png" alt="Commercial Construction" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-building"></i></div>
+              <h3>Commercial Construction</h3>
+              <p>From business complexes to hotels, BigLand delivers superior quality and efficiency that reflects professionalism.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209933/Gemini_Generated_Image_dxohrodxohrodxoh_1_fhidtq.png" alt="Architectural Services" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-drafting-compass"></i></div>
+              <h3>Architectural Services</h3>
+              <p>Every solid build starts with smart planning. Our expert architects handle the numbers and design that make it happen.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200609/imgi_38_7_1_jwx7no.png" alt="Residential Construction" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-home"></i></div>
+              <h3>Residential Construction</h3>
+              <p>Your idea, our work. Build your customized dream home with BigLand's expert vision and lifestyle.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/ChatGPT_Image_Jun_23_2026_03_48_21_PM_c2beun.png" alt="Renovation" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-hammer"></i></div>
+              <h3>Renovation</h3>
+              <p>Breathe new life into your property with our expert renovation services. We transform spaces to match your evolving needs.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="image-wrapper">
+              <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782209932/Gemini_Generated_Image_hyw4lphyw4lphyw4_r8b25p.png" alt="Contractor Services" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="icon-wrapper"><i class="fas fa-hard-hat"></i></div>
+              <h3>Contractor Services</h3>
+              <p>From project management to on-site execution, our skilled contractors ensure every detail is built to the highest standard.</p>
+              <button class="know-more">Know More <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- WHY US -->
-    <section id="why-us">
+    <section id="why-us" class="why-section" aria-labelledby="why-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">Why Choose Us</span>
-          <h2 class="section-title">Why Work <span class="gold">With Us</span></h2>
-          <div class="gold-divider"></div>
+          <h2 class="section-title" id="why-title">Why Work <span class="gold">With Us</span></h2>
+          <p class="section-desc centered">We combine decades of experience with a commitment to quality, transparency, and client satisfaction.</p>
+          <div class="gold-divider centered"></div>
         </div>
-        <div class="why-grid">
-          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-trophy"></i></div><h3>10+ Years</h3><p>Decades of experience delivering premium projects.</p></div>
-          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-shield-alt"></i></div><h3>470+ Checks</h3><p>Rigorous quality assurance at every step.</p></div>
-          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-hand-holding-heart"></i></div><h3>Transparent</h3><p>Real‑time tracking and clear contracts.</p></div>
-          <div class="why-card"><div class="icon-wrapper"><i class="fas fa-clock"></i></div><h3>On‑Time</h3><p>Commitment to delivery as promised.</p></div>
+
+        <div class="why-grid stagger-children">
+          <div class="why-card">
+            <div class="icon-wrapper"><i class="fas fa-trophy"></i></div>
+            <h3>10+ Years of Excellence</h3>
+            <p>With over a decade of experience, we have delivered hundreds of premium projects with unmatched quality.</p>
+          </div>
+          <div class="why-card">
+            <div class="icon-wrapper"><i class="fas fa-shield-alt"></i></div>
+            <h3>470+ Quality Checks</h3>
+            <p>Our rigorous quality assurance process ensures every inch of your home meets the highest standards.</p>
+          </div>
+          <div class="why-card">
+            <div class="icon-wrapper"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3>Transparent Process</h3>
+            <p>From estimation to handover, we maintain complete transparency with real-time project tracking.</p>
+          </div>
+          <div class="why-card">
+            <div class="icon-wrapper"><i class="fas fa-clock"></i></div>
+            <h3>On-Time Delivery</h3>
+            <p>We understand the value of time and ensure your project is completed within the committed timeline.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- TRUSTED -->
-    <section id="trusted" class="trusted-section">
+    <!-- TRUSTED BY -->
+    <section id="trusted" class="trusted-section" aria-labelledby="trusted-title">
       <div class="container">
-        <div class="text-center">
-          <span class="section-label">Our Credibility</span>
-          <h2 class="section-title">Trusted <span class="gold">By</span></h2>
-          <div class="gold-divider"></div>
+        <div class="trusted-header motion-fade-up">
+          <span class="section-badge">
+            <i class="fas fa-handshake" aria-hidden="true"></i> Our Credibility
+          </span>
+          <h2 class="section-title" id="trusted-title">
+            Trusted <span class="gold">By</span>
+          </h2>
+          <div class="title-underline"></div>
+          <p class="section-desc">
+            India's most trusted construction partner — chosen by industry leaders for quality and precision.
+          </p>
         </div>
+
         <div class="marquee-wrapper">
           <div class="marquee-track" id="trustedMarquee"></div>
         </div>
-        <div class="trusted-stats-bar">
-          <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Trusted Brands</span></div>
-          <div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Satisfaction</span></div>
-          <div class="stat-item"><span class="stat-number">11+</span><span class="stat-label">Years</span></div>
+
+        <div class="trusted-stats-bar motion-fade-up">
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Trusted Brands</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Satisfaction Rate</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">11+</span>
+            <span class="stat-label">Years of Excellence</span>
+          </div>
+        </div>
+
+        <div class="trusted-quote motion-fade-up">
+          <i class="fas fa-quote-left" aria-hidden="true"></i>
+          <blockquote>
+            “BigLand's commitment to quality and timelines is unmatched. A true partner in our growth.”
+            <cite>— Managing Director, <strong>Sunvik Group</strong></cite>
+          </blockquote>
         </div>
       </div>
     </section>
 
     <!-- CLIENTS CAROUSEL -->
-    <section id="clients" class="clients-carousel-section">
+    <section id="clients" class="clients-carousel-section" aria-labelledby="clients-title">
       <div class="container">
-        <div class="text-center">
-          <span class="section-label">Our Clients</span>
-          <h2 class="section-title">Trusted <span class="gold">Partners</span></h2>
+        <div class="section-header motion-fade-up">
+          <span class="badge">✦ Our Clients</span>
+          <h2 id="clients-title">Trusted <span>Partners</span></h2>
+          <p>We are proud to serve a diverse range of clients across industries — from corporates to institutions.</p>
         </div>
+
         <div class="clients-carousel-wrapper" id="clientsCarouselWrapper">
           <div class="clients-carousel-track" id="clientsCarouselTrack"></div>
-          <button class="clients-carousel-btn prev" id="clientsCarouselPrev"><i class="fas fa-chevron-left"></i></button>
-          <button class="clients-carousel-btn next" id="clientsCarouselNext"><i class="fas fa-chevron-right"></i></button>
+          <button class="clients-carousel-btn prev" id="clientsCarouselPrev" aria-label="Previous">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="clients-carousel-btn next" id="clientsCarouselNext" aria-label="Next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
+
         <div class="clients-carousel-dots" id="clientsCarouselDots"></div>
       </div>
     </section>
 
     <!-- GALLERY -->
-    <section id="gallery" class="project-gallery-section">
+    <section id="gallery" class="project-gallery-section" aria-labelledby="gallery-title">
       <div class="container">
-        <div class="text-center">
-          <span class="section-label">Our Projects</span>
-          <h2 class="section-title">Complete <span class="gold">Project</span> Gallery</h2>
+        <div class="section-header motion-fade-up">
+          <span class="badge">✦ Our Projects</span>
+          <h2 id="gallery-title">Complete <span>Project</span> Gallery</h2>
+          <p>28 completed projects — a glimpse of our craftsmanship and quality.</p>
         </div>
+
         <div class="gallery-marquee-wrapper" id="galleryMarqueeWrapper"></div>
       </div>
     </section>
 
-    <!-- SHOWCASE -->
-    <section id="showcase" class="showcase-section">
+    <!-- VIDEO SHOWCASE -->
+    <section id="showcase" class="showcase-section" aria-labelledby="showcase-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">Our Portfolio</span>
-          <h2 class="section-title">Complete <span class="gold">Project</span> Showcase</h2>
+          <h2 class="section-title" id="showcase-title">Complete <span class="gold">Project</span> Showcase</h2>
+          <p class="section-desc centered">Explore our completed projects — from luxury villas to commercial spaces. Click any video to watch.</p>
+          <div class="gold-divider centered"></div>
         </div>
+
         <div class="showcase-wrapper">
-          <div class="showcase-track-container"><div class="showcase-track" id="showcaseTrack"></div></div>
-          <div class="showcase-nav"><button id="showcasePrev"><i class="fas fa-chevron-left"></i></button><button id="showcaseNext"><i class="fas fa-chevron-right"></i></button></div>
+          <div class="showcase-track-container">
+            <div class="showcase-track" id="showcaseTrack"></div>
+          </div>
+
+          <div class="showcase-nav">
+            <button id="showcasePrev" aria-label="Previous videos">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="showcaseNext" aria-label="Next videos">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
           <div class="showcase-dots" id="showcaseDots"></div>
         </div>
       </div>
     </section>
 
-    <!-- PARTNERS -->
-    <section id="partners" class="partners-section">
+    <!-- BANKING PARTNERS -->
+    <section id="partners" class="partners-section" aria-labelledby="partners-title">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center motion-fade-up">
           <span class="section-label">Our Banking Partners</span>
-          <h2 class="section-title">Our <span class="gold">Banking</span> Partners</h2>
+          <h2 class="section-title" id="partners-title">Our <span class="gold">Banking</span> Partners</h2>
+          <p class="section-desc centered">Helping customers get easy access to home construction loans.</p>
+          <div class="gold-divider centered"></div>
         </div>
-        <div class="carousel-wrapper"><div class="carousel-track" id="carouselTrack"></div></div>
+
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact-section">
+    <!-- CONTACT / CTA -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
       <div class="container">
-        <div class="contact-card">
-          <span class="section-label">Start Your Journey</span>
-          <h2>Let's Build Your <span class="gold">Dream Home</span></h2>
+        <div class="contact-card motion-fade-up">
+          <span class="section-label" style="opacity:0.6;">Start Your Journey</span>
+          <h2 id="contact-title">Let's Build Your <span class="gold">Dream Home</span></h2>
           <p>Get a free consultation and estimate. Our team will respond within 20 minutes.</p>
           <div class="btn-group">
             <a href="#estimator" class="btn btn-primary">Get Free Estimate</a>
             <a href="#" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Call Now</a>
           </div>
-          <div class="phone"><i class="fas fa-phone-alt"></i> <a href="tel:+918409637705">+91 84096 37705</a></div>
+          <div class="phone">
+            <i class="fas fa-phone-alt"></i> <a href="tel:+918409637705" style="color:inherit;">+91 84096 37705</a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-grid">
-        <div class="footer-col"><h4>Site Map</h4><ul><li><a href="#">How it Works</a></li><li><a href="#">Our Projects</a></li><li><a href="#">Cost Estimator</a></li><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li></ul></div>
-        <div class="footer-col"><h4>Information</h4><ul><li><a href="#">Terms &amp; Conditions</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">FAQs</a></li><li><a href="#">Referral Policy</a></li></ul></div>
-        <div class="footer-col"><h4>Our Services</h4><ul><li><a href="#">Residential</a></li><li><a href="#">Commercial</a></li><li><a href="#">Renovation</a></li><li><a href="#">Interiors</a></li></ul></div>
-        <div class="footer-col contact-col"><h4>Get in Touch</h4><div class="contact-info"><div class="contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+918409637705">+91 84096 37705</a></div><div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@biglandconstruction.com">info@biglandconstruction.com</a></div><div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Patna, Bihar</span></div></div></div>
+        <div class="footer-col">
+          <h4>Site Map</h4>
+          <ul>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Our Projects</a></li>
+            <li><a href="#">Luxury Projects</a></li>
+            <li><a href="#">Cost Estimator</a></li>
+            <li><a href="#">Material Estimator</a></li>
+            <li><a href="#">Floor Plans</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blogs &amp; Articles</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Reviews</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Others</h4>
+          <ul>
+            <li><a href="#">Join as a Professional</a></li>
+            <li><a href="#">Refer a Friend</a></li>
+            <li><a href="#">Channel Partner</a></li>
+          </ul>
+          <br />
+          <h4 style="margin-top: 6px;">Information</h4>
+          <ul>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Cancellation Policy</a></li>
+            <li><a href="#">Referral Policy</a></li>
+            <li><a href="#">News &amp; Media</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Residential Construction</a></li>
+            <li><a href="#">Commercial Construction</a></li>
+            <li><a href="#">Villa Construction</a></li>
+            <li><a href="#">Farmhouse Construction</a></li>
+            <li><a href="#">Warehouse Construction</a></li>
+            <li><a href="#">Retail Construction</a></li>
+            <li><a href="#">Hospital Construction</a></li>
+            <li><a href="#">School Construction</a></li>
+            <li><a href="#">Home Renovation</a></li>
+          </ul>
+          <br />
+          <h4 style="margin-top: 6px;">Floor Plans</h4>
+          <ul>
+            <li><a href="#">1 BHK House Plan</a></li>
+            <li><a href="#">2 BHK House Plan</a></li>
+            <li><a href="#">3 BHK House Plan</a></li>
+            <li><a href="#">Duplex House Plan</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Calculators</h4>
+          <ul>
+            <li><a href="#">Cost Estimator</a></li>
+            <li><a href="#">Stamp Duty Estimator</a></li>
+            <li><a href="#">Compound Wall Calculator</a></li>
+            <li><a href="#">Staircase Calculator</a></li>
+            <li><a href="#">Property Tax Calculator</a></li>
+            <li><a href="#">Foundation Cost Estimator</a></li>
+          </ul>
+          <br />
+          <h4 style="margin-top: 6px;">Architectural</h4>
+          <ul>
+            <li><a href="#">Residential Architects</a></li>
+            <li><a href="#">Commercial Architects</a></li>
+            <li><a href="#">Interior Designers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+          <h4>Get in Touch</h4>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <a href="tel:+918409637705">+91 84096 37705</a>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:info@biglandconstruction.com">info@biglandconstruction.com</a>
+            </div>
+            <div class="contact-item" style="align-items: flex-start; margin-top: 6px;">
+              <i class="fas fa-map-marker-alt" style="margin-top: 3px;"></i>
+              <div class="address-block">
+                <strong style="color:#e2e8f0;">Bigland Construction</strong><br />
+                B5 Lane 1, Vijay Nagar,<br />
+                Bailey Road, Patna - 800014<br />
+                Bihar, India
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="footer-cities"><div class="cities-row">
-        <span class="city-label">Bihar</span><a href="#">Patna</a><a href="#">Gaya</a><a href="#">Bhagalpur</a><a href="#">Muzaffarpur</a>
-        <span class="city-label">Jharkhand</span><a href="#">Ranchi</a><a href="#">Jamshedpur</a><a href="#">Dhanbad</a>
-        <span class="city-label">Uttar Pradesh</span><a href="#">Lucknow</a><a href="#">Varanasi</a><a href="#">Kanpur</a><a href="#">Noida</a>
-      </div></div>
+
+      <!-- SEO City Links -->
+      <div class="footer-cities">
+        <div class="cities-row">
+          <span class="city-label">Bihar</span>
+          <a href="#">Construction Companies in Patna</a>
+          <a href="#">Home Construction Patna</a>
+          <a href="#">Builders in Patna</a>
+          <a href="#">Construction Contractors Patna</a>
+          <a href="#">Low-Cost House Construction Patna</a>
+          <a href="#">Building Contractors Gaya</a>
+          <a href="#">Home Construction Bhagalpur</a>
+          <a href="#">Builders in Muzaffarpur</a>
+          <a href="#">Construction Company Bihar</a>
+          <span class="divider-dot">•</span>
+          <span class="city-label">Jharkhand</span>
+          <a href="#">Construction Companies in Ranchi</a>
+          <a href="#">Home Construction Ranchi</a>
+          <a href="#">Builders in Jamshedpur</a>
+          <a href="#">Construction Contractors Dhanbad</a>
+          <a href="#">Low-Cost House Construction Jharkhand</a>
+          <a href="#">Building Contractors Bokaro</a>
+          <a href="#">Home Construction Hazaribagh</a>
+          <span class="divider-dot">•</span>
+          <span class="city-label">Uttar Pradesh</span>
+          <a href="#">Construction Companies in Lucknow</a>
+          <a href="#">Home Construction Lucknow</a>
+          <a href="#">Builders in Varanasi</a>
+          <a href="#">Construction Contractors Kanpur</a>
+          <a href="#">Low-Cost House Construction UP</a>
+          <a href="#">Building Contractors Allahabad</a>
+          <a href="#">Home Construction Gorakhpur</a>
+          <a href="#">Builders in Noida</a>
+          <a href="#">Construction Company Uttar Pradesh</a>
+          <span class="divider-dot">•</span>
+          <span class="city-label">Regional</span>
+          <a href="#">Villa Builders Bihar</a>
+          <a href="#">Villa Builders Jharkhand</a>
+          <a href="#">Villa Builders Uttar Pradesh</a>
+          <a href="#">Home Renovation Patna</a>
+          <a href="#">Home Renovation Ranchi</a>
+          <a href="#">Home Renovation Lucknow</a>
+          <a href="#">Architects in Bihar</a>
+          <a href="#">Architects in Jharkhand</a>
+          <a href="#">Architects in Uttar Pradesh</a>
+        </div>
+      </div>
+
       <div class="footer-bottom">
-        <div class="app-links"><a href="#"><i class="fab fa-google-play"></i><span>Google Play</span></a><a href="#"><i class="fab fa-apple"></i><span>App Store</span></a></div>
-        <div class="copyright">© 2026 Bigland Construction. All rights reserved.</div>
+        <div class="app-links">
+          <a href="#">
+            <i class="fab fa-google-play"></i>
+            <span class="app-text">
+              <small>Get it on</small>
+              Google Play
+            </span>
+          </a>
+          <a href="#">
+            <i class="fab fa-apple"></i>
+            <span class="app-text">
+              <small>Download on the</small>
+              App Store
+            </span>
+          </a>
+        </div>
+        <div class="copyright">
+          © 2026 Bigland Construction. All rights reserved.
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="videoModalClose" aria-label="Close video">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="video-wrapper" id="videoWrapper">
+        <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" title="Project video"></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
     (function() {
       'use strict';
 
-      // Mobile menu toggle
+      // ===== SCROLL REVEAL: Motion Classes =====
+      const motionElements = document.querySelectorAll('.motion-fade-up, .motion-fade-in, .motion-scale-in, .stagger-children');
+
+      const motionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // If it's a stagger-children, we also need to add visible to it directly
+            if (entry.target.classList.contains('stagger-children')) {
+              entry.target.classList.add('visible');
+            }
+            // Optionally unobserve after reveal
+            // motionObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      motionElements.forEach(el => motionObserver.observe(el));
+
+      // Also observe package cards individually (they are inside stagger-children)
+      // But stagger-children will handle children, so we don't need separate.
+
+      // ===== MODAL (More) =====
+      const moreBtn = document.getElementById('moreBtn');
+      const modal = document.getElementById('moreModal');
+      const modalClose = document.getElementById('modalClose');
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');
-      menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('open');
-        this.setAttribute('aria-expanded', navMenu.classList.contains('open'));
+
+      function openModal() {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        moreBtn.classList.add('active');
+        if (navMenu.classList.contains('open')) {
+          navMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        moreBtn.classList.remove('active');
+      }
+
+      moreBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (modal.classList.contains('open')) closeModal();
+        else openModal();
       });
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      // ===== MOBILE MENU =====
+      menuToggle.addEventListener('click', function() {
+        const isOpen = navMenu.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen);
+        if (modal.classList.contains('open')) closeModal();
+      });
+
       document.querySelectorAll('#navMenu a').forEach(link => {
         link.addEventListener('click', () => {
           navMenu.classList.remove('open');
@@ -1563,85 +3410,37 @@
         });
       });
 
-      // COST ESTIMATOR
-      (function() {
-        const options = document.querySelectorAll('.est-package-option');
-        const areaInput = document.getElementById('estAreaInput');
-        const form = document.getElementById('estimateForm');
-        const resultPanel = document.getElementById('estResultPanel');
-        const resultPackage = document.getElementById('estResultPackage');
-        const resultArea = document.getElementById('estResultArea');
-        const resultRate = document.getElementById('estResultRate');
-        const resultTotal = document.getElementById('estResultTotal');
-        const resetBtn = document.getElementById('estResetBtn');
-
-        let selectedPackage = 'Basic';
-        let selectedPrice = 1950;
-
-        options.forEach(opt => {
-          opt.addEventListener('click', function() {
-            options.forEach(o => o.classList.remove('active'));
-            this.classList.add('active');
-            selectedPackage = this.dataset.package;
-            selectedPrice = parseInt(this.dataset.price, 10);
-            if (resultPanel.classList.contains('visible')) updateResult();
-          });
-        });
-
-        function updateResult() {
-          const area = parseInt(areaInput.value, 10) || 0;
-          const valid = area >= 100 ? area : 0;
-          const total = valid * selectedPrice;
-          resultPackage.textContent = selectedPackage;
-          resultArea.textContent = valid.toLocaleString('en-IN') + ' sqft';
-          resultRate.textContent = '₹' + selectedPrice.toLocaleString('en-IN');
-          resultTotal.textContent = '₹' + total.toLocaleString('en-IN');
-        }
-
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const area = parseInt(areaInput.value, 10);
-          if (isNaN(area) || area < 100) {
-            alert('Please enter a valid area (min 100 sqft).');
-            return;
-          }
-          resultPanel.classList.add('visible');
-          updateResult();
-          setTimeout(() => resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-        });
-
-        resetBtn.addEventListener('click', function() {
-          options.forEach(o => o.classList.remove('active'));
-          document.querySelector('.est-package-option[data-package="Basic"]').classList.add('active');
-          selectedPackage = 'Basic';
-          selectedPrice = 1950;
-          areaInput.value = 1200;
-          resultPanel.classList.remove('visible');
-        });
-      })();
-
-      // TRUSTED MARQUEE
+      // ===== TRUSTED BY MARQUEE =====
       const trustedLogos = [
         'https://www.biglandconstruction.com/wp-content/uploads/2026/05/5-2.png',
         'https://www.biglandconstruction.com/wp-content/uploads/2026/05/6-1.png',
         'https://www.biglandconstruction.com/wp-content/uploads/2026/05/3-3.png',
-        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/4-3.png'
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/4-3.png',
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/5-2.png',
+        'https://www.biglandconstruction.com/wp-content/uploads/2026/05/6-1.png'
       ];
-      const tm = document.getElementById('trustedMarquee');
-      if (tm) {
-        [...trustedLogos, ...trustedLogos].forEach((src, i) => {
-          const div = document.createElement('div');
-          div.className = 'logo-item';
+      const marqueeTrack = document.getElementById('trustedMarquee');
+      if (marqueeTrack) {
+        [...trustedLogos, ...trustedLogos].forEach((src, index) => {
+          const item = document.createElement('div');
+          item.className = 'logo-item';
           const img = document.createElement('img');
           img.src = src;
-          img.alt = 'Trusted Brand';
+          img.alt = 'Trusted Partner ' + (index + 1);
           img.loading = 'lazy';
-          div.appendChild(img);
-          tm.appendChild(div);
+          img.onerror = function() {
+            this.style.display = 'none';
+            const fb = document.createElement('span');
+            fb.className = 'fallback-text';
+            fb.textContent = 'Brand ' + ((index % trustedLogos.length) + 1);
+            item.appendChild(fb);
+          };
+          item.appendChild(img);
+          marqueeTrack.appendChild(item);
         });
       }
 
-      // CLIENTS CAROUSEL
+      // ===== CLIENTS CAROUSEL =====
       const clientImages = [
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_73_shishu_fprga7.jpg',
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782208435/imgi_74_images_nvbgkx.jpg',
@@ -1658,54 +3457,177 @@
       const clientNext = document.getElementById('clientsCarouselNext');
       const clientWrapper = document.getElementById('clientsCarouselWrapper');
 
-      let clientIdx = 0, clientPerView = 4, clientTotal = 0;
+      let clientCurrentSlide = 0;
+      let clientItemsPerView = 4;
+      let clientTotalSlides = 0;
+      let clientAutoInterval = null;
+      const clientAutoDelay = 4000;
 
-      function buildClients() {
-        clientTrack.innerHTML = ''; clientDots.innerHTML = '';
+      function getClientItemsPerView() {
         const w = window.innerWidth;
-        clientPerView = w < 480 ? 1 : w < 768 ? 2 : w < 1024 ? 3 : 4;
-        clientImages.forEach((src, i) => {
+        if (w < 480) return 1;
+        if (w < 768) return 2;
+        if (w < 1024) return 3;
+        return 4;
+      }
+
+      function buildClientCarousel() {
+        clientTrack.innerHTML = '';
+        clientDots.innerHTML = '';
+        clientItemsPerView = getClientItemsPerView();
+
+        clientImages.forEach((src, index) => {
           const card = document.createElement('div');
           card.className = 'client-carousel-card';
           const img = document.createElement('img');
           img.src = src;
-          img.alt = 'Client';
+          img.alt = 'Client ' + (index + 1);
           img.loading = 'lazy';
+          img.onerror = function() {
+            this.style.display = 'none';
+            const fb = document.createElement('span');
+            fb.className = 'fallback-text';
+            fb.textContent = 'Client ' + (index + 1);
+            card.appendChild(fb);
+          };
           card.appendChild(img);
           clientTrack.appendChild(card);
         });
-        clientTotal = Math.ceil(clientImages.length / clientPerView);
-        for (let i = 0; i < clientTotal; i++) {
+
+        clientTotalSlides = Math.ceil(clientImages.length / clientItemsPerView);
+        for (let i = 0; i < clientTotalSlides; i++) {
           const dot = document.createElement('button');
           dot.className = 'dot' + (i === 0 ? ' active' : '');
-          dot.addEventListener('click', () => goClient(i));
+          dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          dot.dataset.index = i;
+          dot.addEventListener('click', function() {
+            goToClientSlide(parseInt(this.dataset.index));
+            resetClientAutoSlide();
+          });
           clientDots.appendChild(dot);
         }
-        goClient(0);
+
+        clientCurrentSlide = 0;
+        updateClientCarousel();
+        updateClientDots();
+        updateClientButtons();
+        startClientAutoSlide();
       }
 
-      function goClient(idx) {
-        if (idx < 0) idx = 0;
-        if (idx >= clientTotal) idx = clientTotal - 1;
-        clientIdx = idx;
-        const gap = 20;
-        const containerW = clientWrapper.offsetWidth;
-        const itemW = (containerW - (clientPerView - 1) * gap) / clientPerView;
-        const slideW = itemW + gap;
-        const offset = idx * slideW * clientPerView;
+      function updateClientCarousel() {
+        const containerWidth = clientWrapper.offsetWidth;
+        const gap = 24;
+        const itemWidth = (containerWidth - (clientItemsPerView - 1) * gap) / clientItemsPerView;
+        const slideW = itemWidth + gap;
+        const offset = clientCurrentSlide * slideW * clientItemsPerView;
         clientTrack.style.transform = 'translateX(-' + offset + 'px)';
-        clientTrack.querySelectorAll('.client-carousel-card').forEach(c => c.style.flex = '0 0 ' + itemW + 'px');
-        clientDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-        clientPrev.disabled = idx === 0;
-        clientNext.disabled = idx >= clientTotal - 1;
+        clientTrack.querySelectorAll('.client-carousel-card').forEach(item => {
+          item.style.width = itemWidth + 'px';
+          item.style.flexShrink = '0';
+        });
       }
 
-      clientPrev.addEventListener('click', () => goClient(clientIdx - 1));
-      clientNext.addEventListener('click', () => goClient(clientIdx + 1));
-      window.addEventListener('resize', () => { buildClients(); });
-      buildClients();
+      function goToClientSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= clientTotalSlides) index = clientTotalSlides - 1;
+        clientCurrentSlide = index;
+        updateClientCarousel();
+        updateClientDots();
+        updateClientButtons();
+      }
 
-      // GALLERY MARQUEE
+      function updateClientDots() {
+        clientDots.querySelectorAll('.dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === clientCurrentSlide);
+        });
+      }
+
+      function updateClientButtons() {
+        clientPrev.disabled = clientCurrentSlide === 0;
+        clientNext.disabled = clientCurrentSlide >= clientTotalSlides - 1;
+      }
+
+      function startClientAutoSlide() {
+        if (clientAutoInterval) clearInterval(clientAutoInterval);
+        clientAutoInterval = setInterval(function() {
+          goToClientSlide(clientCurrentSlide + 1);
+        }, clientAutoDelay);
+      }
+
+      function resetClientAutoSlide() {
+        if (clientAutoInterval) clearInterval(clientAutoInterval);
+        startClientAutoSlide();
+      }
+
+      clientPrev.addEventListener('click', function() {
+        if (clientCurrentSlide > 0) goToClientSlide(clientCurrentSlide - 1);
+        resetClientAutoSlide();
+      });
+      clientNext.addEventListener('click', function() {
+        if (clientCurrentSlide < clientTotalSlides - 1) goToClientSlide(clientCurrentSlide + 1);
+        resetClientAutoSlide();
+      });
+
+      let clientDragStartX = 0,
+        clientDragStartIndex = 0,
+        clientIsDragging = false;
+      clientWrapper.addEventListener('mousedown', function(e) {
+        clientDragStartX = e.clientX;
+        clientDragStartIndex = clientCurrentSlide;
+        clientIsDragging = true;
+      });
+      window.addEventListener('mousemove', function(e) {
+        if (!clientIsDragging) return;
+        const delta = e.clientX - clientDragStartX;
+        const threshold = 50;
+        if (delta < -threshold) {
+          goToClientSlide(clientDragStartIndex + 1);
+          clientIsDragging = false;
+          resetClientAutoSlide();
+        } else if (delta > threshold) {
+          goToClientSlide(clientDragStartIndex - 1);
+          clientIsDragging = false;
+          resetClientAutoSlide();
+        }
+      });
+      window.addEventListener('mouseup', function() { clientIsDragging = false; });
+
+      let clientTouchStartX = 0,
+        clientTouchStartIndex = 0;
+      clientWrapper.addEventListener('touchstart', function(e) {
+        clientTouchStartX = e.touches[0].clientX;
+        clientTouchStartIndex = clientCurrentSlide;
+      }, { passive: true });
+      clientWrapper.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const delta = touchEndX - clientTouchStartX;
+        const threshold = 40;
+        if (delta < -threshold) {
+          goToClientSlide(clientTouchStartIndex + 1);
+          resetClientAutoSlide();
+        } else if (delta > threshold) {
+          goToClientSlide(clientTouchStartIndex - 1);
+          resetClientAutoSlide();
+        }
+      }, { passive: true });
+
+      let clientResizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(clientResizeTimer);
+        clientResizeTimer = setTimeout(function() {
+          const newPerView = getClientItemsPerView();
+          if (newPerView !== clientItemsPerView) {
+            const ci = clientCurrentSlide;
+            buildClientCarousel();
+            if (ci < clientTotalSlides) goToClientSlide(ci);
+            else goToClientSlide(clientTotalSlides - 1);
+          } else {
+            updateClientCarousel();
+          }
+        }, 200);
+      });
+
+      // ===== GALLERY MARQUEE =====
       const galleryImages = [
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200586/imgi_32_16_toztgd.png',
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200587/imgi_33_6_o9ypvi.png',
@@ -1718,123 +3640,450 @@
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200592/imgi_36_12_gamv59.png',
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200594/imgi_52_4_f8mfmx.png',
         'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200594/imgi_42_8_x05qkj.png',
-        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200595/imgi_43_6_q9cj5h.png'
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200595/imgi_43_6_q9cj5h.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200595/imgi_40_4-2_ojyknw.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200596/imgi_49_1_uyhskx.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200597/imgi_44_9_syxmmh.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200598/imgi_53_5_hj4l9w.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200598/imgi_55_13_dsxjgb.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200598/imgi_51_2_uasdbh.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200600/imgi_45_10_q8dgs1.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200601/imgi_46_11_e86ups.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200602/imgi_54_14_drvqoe.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200602/imgi_56_8_w32xyg.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200602/imgi_47_5-1_jqxdto.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200603/imgi_48_12_xhhcey.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200604/imgi_57_11_ii931t.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200605/imgi_50_3_k3dcpe.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200606/imgi_58_15_h7zd8h.png',
+        'https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782200609/imgi_38_7_1_jwx7no.png'
       ];
-      const galWrap = document.getElementById('galleryMarqueeWrapper');
-      const rowSize = [4, 4, 4];
+
+      const galWrapper = document.getElementById('galleryMarqueeWrapper');
+      const rowSize = [10, 10, 8];
+
+      function createGalleryCard(src) {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        const img = document.createElement('img');
+        img.className = 'gallery-image';
+        img.src = src;
+        img.alt = 'Project image';
+        img.loading = 'lazy';
+        card.appendChild(img);
+        return card;
+      }
+
       let start = 0;
-      rowSize.forEach(cnt => {
-        const items = galleryImages.slice(start, start + cnt);
-        start += cnt;
-        const row = document.createElement('div');
-        row.className = 'gallery-marquee-row';
+      rowSize.forEach((count) => {
+        const rowItems = galleryImages.slice(start, start + count);
+        start += count;
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'gallery-marquee-row';
         const track = document.createElement('div');
         track.className = 'gallery-marquee-track';
-        items.concat(items).forEach(src => {
-          const card = document.createElement('div');
-          card.className = 'gallery-card';
-          const img = document.createElement('img');
-          img.className = 'gallery-image';
-          img.src = src;
-          img.alt = 'Project';
-          img.loading = 'lazy';
-          card.appendChild(img);
-          track.appendChild(card);
-        });
-        row.appendChild(track);
-        galWrap.appendChild(row);
+        rowItems.forEach(src => { track.appendChild(createGalleryCard(src)); });
+        rowItems.forEach(src => { track.appendChild(createGalleryCard(src)); });
+        rowDiv.appendChild(track);
+        galWrapper.appendChild(rowDiv);
       });
 
-      // SHOWCASE
-      const videoIds = ['SRDA5bsCevM', 'mwb00JXv6IM', 'm_andFPfOx4', '2tbg0IZQ6oA', 'oRTQEckEdR8'];
-      const videoTitles = ['Luxury Villa', 'Modern Apartment', 'Commercial Office', 'Residential Tower', 'Interior Design'];
-      const showTrack = document.getElementById('showcaseTrack');
-      const showDots = document.getElementById('showcaseDots');
-      const showPrev = document.getElementById('showcasePrev');
-      const showNext = document.getElementById('showcaseNext');
-      let showIdx = 0, showPerView = 4, showTotal = 0;
+      // ===== VIDEO SHOWCASE =====
+      const videoIds = [
+        'SRDA5bsCevM', 'mwb00JXv6IM', 'm_andFPfOx4', '2tbg0IZQ6oA',
+        'oRTQEckEdR8', 'wEmsA87uhfY', '6-yG9TueAGM', '3oIdrqRRI14',
+        'eeWtkdw1pzo', 'Vc6eJIqih9s', 'zzWdFWSOYwA'
+      ];
+      const videoTitles = [
+        'Luxury Villa Construction', 'Modern Apartment Complex',
+        'Commercial Office Space', 'Premium Residential Tower',
+        'Luxury Interior Design', 'Modern Home Renovation',
+        'Commercial Shopping Center', 'Luxury Hotel Construction',
+        'Residential Community Project', 'Modern Office Building',
+        'Premium Villa Project'
+      ];
+
+      const showcaseTrack = document.getElementById('showcaseTrack');
+      const dotsShowcase = document.getElementById('showcaseDots');
+      const prevShow = document.getElementById('showcasePrev');
+      const nextShow = document.getElementById('showcaseNext');
+
+      let currentSlide = 0;
+      let itemsPerView = 4;
+      let totalSlides = 0;
+      let videoAutoInterval = null;
+      const videoAutoDelay = 5000;
+
+      function getItemsPerView() {
+        const w = window.innerWidth;
+        if (w < 480) return 1;
+        if (w < 768) return 2;
+        if (w < 1024) return 3;
+        return 4;
+      }
 
       function buildShowcase() {
-        showTrack.innerHTML = ''; showDots.innerHTML = '';
-        const w = window.innerWidth;
-        showPerView = w < 480 ? 1 : w < 768 ? 2 : w < 1024 ? 3 : 4;
-        videoIds.forEach((id, i) => {
+        showcaseTrack.innerHTML = '';
+        dotsShowcase.innerHTML = '';
+        itemsPerView = getItemsPerView();
+
+        videoIds.forEach((id, index) => {
           const item = document.createElement('div');
           item.className = 'showcase-item';
           item.dataset.videoId = id;
+          item.setAttribute('role', 'button');
+          item.setAttribute('tabindex', '0');
+          item.setAttribute('aria-label', 'Play video: ' + (videoTitles[index] || 'Project ' + (index + 1)));
+
           const img = document.createElement('img');
           img.src = 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg';
-          img.alt = videoTitles[i] || 'Video';
+          img.alt = videoTitles[index] || 'Project ' + (index + 1);
           img.loading = 'lazy';
+          img.onerror = function() {
+            this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360"%3E%3Crect width="480" height="360" fill="%23e6e2da"/%3E%3Ctext x="50%25" y="50%25" font-family="Inter" font-size="20" fill="%236b6760" text-anchor="middle" dy=".3em"%3ENo thumbnail%3C/text%3E%3C/svg%3E';
+          };
+
           const overlay = document.createElement('div');
           overlay.className = 'play-overlay';
           overlay.innerHTML = '<i class="fas fa-play-circle"></i>';
-          const title = document.createElement('div');
-          title.className = 'video-title';
-          title.textContent = videoTitles[i] || 'Project';
+
+          const titleEl = document.createElement('div');
+          titleEl.className = 'video-title';
+          titleEl.textContent = videoTitles[index] || 'Project ' + (index + 1);
+
           item.appendChild(img);
           item.appendChild(overlay);
-          item.appendChild(title);
-          item.addEventListener('click', () => {
-            alert('Video ID: ' + id + ' (YouTube embed would open here)');
+          item.appendChild(titleEl);
+
+          item.addEventListener('click', function() { openVideo(id); });
+          item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+              openVideo(id); }
           });
-          showTrack.appendChild(item);
+
+          showcaseTrack.appendChild(item);
         });
-        showTotal = Math.ceil(videoIds.length / showPerView);
-        for (let i = 0; i < showTotal; i++) {
+
+        totalSlides = Math.ceil(videoIds.length / itemsPerView);
+        for (let i = 0; i < totalSlides; i++) {
           const dot = document.createElement('button');
           dot.className = 'dot' + (i === 0 ? ' active' : '');
-          dot.addEventListener('click', () => goShow(i));
-          showDots.appendChild(dot);
+          dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          dot.dataset.index = i;
+          dot.addEventListener('click', function() {
+            goToSlide(parseInt(this.dataset.index));
+            resetVideoAutoSlide();
+          });
+          dotsShowcase.appendChild(dot);
         }
-        goShow(0);
+
+        currentSlide = 0;
+        updateShowcase();
+        updateShowcaseDots();
+        updateShowcaseButtons();
+        startVideoAutoSlide();
       }
 
-      function goShow(idx) {
-        if (idx < 0) idx = 0;
-        if (idx >= showTotal) idx = showTotal - 1;
-        showIdx = idx;
-        const gap = 16;
-        const containerW = document.querySelector('.showcase-track-container').offsetWidth;
-        const itemW = (containerW - (showPerView - 1) * gap) / showPerView;
-        const slideW = itemW + gap;
-        const offset = idx * slideW * showPerView;
-        showTrack.style.transform = 'translateX(-' + offset + 'px)';
-        showTrack.querySelectorAll('.showcase-item').forEach(c => c.style.flex = '0 0 ' + itemW + 'px');
-        showDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-        showPrev.disabled = idx === 0;
-        showNext.disabled = idx >= showTotal - 1;
+      function updateShowcase() {
+        const containerWidth = showcaseTrack.parentElement.offsetWidth;
+        const gap = 1.2 * 16;
+        const itemWidth = (containerWidth - (itemsPerView - 1) * gap) / itemsPerView;
+        const slideW = itemWidth + gap;
+        const offset = currentSlide * slideW * itemsPerView;
+        showcaseTrack.style.transform = 'translateX(-' + offset + 'px)';
+        showcaseTrack.querySelectorAll('.showcase-item').forEach(item => {
+          item.style.flex = '0 0 ' + itemWidth + 'px';
+        });
       }
 
-      showPrev.addEventListener('click', () => goShow(showIdx - 1));
-      showNext.addEventListener('click', () => goShow(showIdx + 1));
-      window.addEventListener('resize', () => { buildShowcase(); });
-      buildShowcase();
+      function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentSlide = index;
+        updateShowcase();
+        updateShowcaseDots();
+        updateShowcaseButtons();
+      }
 
-      // PARTNERS CAROUSEL
+      function updateShowcaseDots() {
+        dotsShowcase.querySelectorAll('.dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlide);
+        });
+      }
+
+      function updateShowcaseButtons() {
+        prevShow.disabled = currentSlide === 0;
+        nextShow.disabled = currentSlide >= totalSlides - 1;
+      }
+
+      function startVideoAutoSlide() {
+        if (videoAutoInterval) clearInterval(videoAutoInterval);
+        videoAutoInterval = setInterval(function() {
+          goToSlide(currentSlide + 1);
+        }, videoAutoDelay);
+      }
+
+      function resetVideoAutoSlide() {
+        if (videoAutoInterval) clearInterval(videoAutoInterval);
+        startVideoAutoSlide();
+      }
+
+      prevShow.addEventListener('click', function() {
+        if (currentSlide > 0) goToSlide(currentSlide - 1);
+        resetVideoAutoSlide();
+      });
+      nextShow.addEventListener('click', function() {
+        if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+        resetVideoAutoSlide();
+      });
+
+      let videoDragStartX = 0,
+        videoDragStartIndex = 0,
+        videoIsDragging = false;
+      const showcaseWrapper = document.querySelector('.showcase-wrapper');
+
+      showcaseWrapper.addEventListener('mousedown', function(e) {
+        videoDragStartX = e.clientX;
+        videoDragStartIndex = currentSlide;
+        videoIsDragging = true;
+      });
+      window.addEventListener('mousemove', function(e) {
+        if (!videoIsDragging) return;
+        const delta = e.clientX - videoDragStartX;
+        const threshold = 50;
+        if (delta < -threshold) {
+          goToSlide(videoDragStartIndex + 1);
+          videoIsDragging = false;
+          resetVideoAutoSlide();
+        } else if (delta > threshold) {
+          goToSlide(videoDragStartIndex - 1);
+          videoIsDragging = false;
+          resetVideoAutoSlide();
+        }
+      });
+      window.addEventListener('mouseup', function() { videoIsDragging = false; });
+
+      let videoTouchStartX = 0,
+        videoTouchStartIndex = 0;
+      showcaseWrapper.addEventListener('touchstart', function(e) {
+        videoTouchStartX = e.touches[0].clientX;
+        videoTouchStartIndex = currentSlide;
+      }, { passive: true });
+      showcaseWrapper.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const delta = touchEndX - videoTouchStartX;
+        const threshold = 40;
+        if (delta < -threshold) {
+          goToSlide(videoTouchStartIndex + 1);
+          resetVideoAutoSlide();
+        } else if (delta > threshold) {
+          goToSlide(videoTouchStartIndex - 1);
+          resetVideoAutoSlide();
+        }
+      }, { passive: true });
+
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          const newPerView = getItemsPerView();
+          if (newPerView !== itemsPerView) {
+            const ci = currentSlide;
+            buildShowcase();
+            if (ci < totalSlides) goToSlide(ci);
+            else goToSlide(totalSlides - 1);
+          } else {
+            updateShowcase();
+          }
+        }, 200);
+      });
+
+      // ===== VIDEO MODAL =====
+      const modalVideo = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      const closeBtn = document.getElementById('videoModalClose');
+
+      function openVideo(videoId) {
+        iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+        modalVideo.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function() { closeBtn.focus(); }, 100);
+        resetVideoAutoSlide();
+      }
+
+      function closeVideo() {
+        modalVideo.classList.remove('open');
+        document.body.style.overflow = '';
+        iframe.src = '';
+        startVideoAutoSlide();
+      }
+
+      closeBtn.addEventListener('click', closeVideo);
+      modalVideo.addEventListener('click', function(e) { if (e.target === modalVideo) closeVideo(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalVideo.classList.contains('open')) closeVideo();
+      });
+
+      // ===== PARTNERS CAROUSEL =====
       const partners = [
-        { name: 'Bajaj Finserv', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/bajaj.webp' },
-        { name: 'BASIC', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/basic.webp' },
-        { name: 'Godrej', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/godrej.webp' },
-        { name: 'HDFC', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/hdfc_home_loan.webp' },
-        { name: 'Housing.com', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/housing.webp' },
-        { name: 'SBI', img: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/sbi_home_loan.webp' }
+        { name: 'Bajaj Finserv', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/bajaj.webp' },
+        { name: 'BASIC', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/basic.webp' },
+        { name: 'Godrej', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/godrej.webp' },
+        { name: 'HDFC Home Loan', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/hdfc_home_loan.webp' },
+        { name: 'Housing.com', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/housing.webp' },
+        { name: 'SBI Home Loans', image: 'https://d2d4xyu1zrrrws.cloudfront.net/website/landing-pages/c/bnb-revamp/sbi_home_loan.webp' }
       ];
       const partnerTrack = document.getElementById('carouselTrack');
       if (partnerTrack) {
-        partners.concat(partners).forEach(p => {
+        [...partners, ...partners].forEach(function(partner) {
           const item = document.createElement('div');
           item.className = 'carousel-item';
           const img = document.createElement('img');
-          img.src = p.img;
-          img.alt = p.name;
+          img.src = partner.image;
+          img.alt = partner.name;
           img.loading = 'lazy';
+          img.onerror = function() {
+            this.style.display = 'none';
+            const fb = document.createElement('span');
+            fb.className = 'fallback-text';
+            fb.textContent = partner.name;
+            item.appendChild(fb);
+          };
           item.appendChild(img);
           partnerTrack.appendChild(item);
         });
       }
 
-      console.log('BigLand · All sections loaded ✅');
+      // ===== SERVICES BUTTONS =====
+      document.querySelector('.see-all')?.addEventListener('click', function() {
+        alert('✨ All Services page — coming soon!');
+      });
+      document.querySelectorAll('.know-more').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const card = this.closest('.service-card');
+          const title = card.querySelector('h3')?.textContent || 'Service';
+          alert('📋 Learn more about: ' + title);
+        });
+      });
+
+      // ===== COST ESTIMATOR =====
+      (function() {
+        const options = Array.from(document.querySelectorAll('.est-package-option'));
+        const areaInput = document.getElementById('estAreaInput');
+        const form = document.getElementById('estimateForm');
+        const resultPanel = document.getElementById('estResultPanel');
+        const resultPackage = document.getElementById('estResultPackage');
+        const resultArea = document.getElementById('estResultArea');
+        const resultRate = document.getElementById('estResultRate');
+        const resultTotal = document.getElementById('estResultTotal');
+        const resetBtn = document.getElementById('estResetBtn');
+        const contactCta = document.getElementById('estContactCta');
+        const packageError = document.getElementById('estPackageError');
+        const areaError = document.getElementById('estAreaError');
+
+        if (!form) return;
+
+        let selectedPackage = 'Basic';
+        let selectedPrice = 1950;
+
+        options.forEach(function(opt) {
+          opt.addEventListener('click', function() {
+            options.forEach(function(o) {
+              o.classList.remove('active');
+              o.setAttribute('aria-checked', 'false');
+            });
+            this.classList.add('active');
+            this.setAttribute('aria-checked', 'true');
+            selectedPackage = this.dataset.package;
+            selectedPrice = parseInt(this.dataset.price, 10);
+            packageError.classList.remove('visible');
+            if (resultPanel.classList.contains('visible')) updateResult();
+          });
+          opt.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+              this.click(); }
+          });
+        });
+
+        function validateArea() {
+          const val = parseInt(areaInput.value, 10);
+          if (isNaN(val) || val < 100) {
+            areaInput.classList.add('error');
+            areaError.classList.add('visible');
+            return false;
+          }
+          areaInput.classList.remove('error');
+          areaError.classList.remove('visible');
+          return true;
+        }
+        areaInput.addEventListener('blur', validateArea);
+
+        let debounceTimer;
+        areaInput.addEventListener('input', function() {
+          if (this.classList.contains('error')) validateArea();
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(function() {
+            if (resultPanel.classList.contains('visible') && validateArea()) updateResult();
+          }, 350);
+        });
+
+        function updateResult() {
+          const area = parseInt(areaInput.value, 10) || 0;
+          const validArea = area >= 100 ? area : 0;
+          const total = validArea * selectedPrice;
+          resultPackage.textContent = selectedPackage;
+          resultArea.textContent = validArea.toLocaleString('en-IN') + ' sqft';
+          resultRate.textContent = '₹' + selectedPrice.toLocaleString('en-IN');
+          resultTotal.textContent = '₹' + total.toLocaleString('en-IN');
+          contactCta.href = 'tel:+918409637705';
+        }
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const areaValid = validateArea();
+          if (!areaValid) return;
+          resultPanel.classList.add('visible');
+          updateResult();
+          if (window.innerWidth < 640) {
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+
+        resetBtn.addEventListener('click', function() {
+          options.forEach(function(o) {
+            o.classList.remove('active');
+            o.setAttribute('aria-checked', 'false');
+          });
+          const defaultOpt = options.find(function(o) { return o.dataset.package === 'Basic'; });
+          if (defaultOpt) {
+            defaultOpt.classList.add('active');
+            defaultOpt.setAttribute('aria-checked', 'true');
+          }
+          selectedPackage = 'Basic';
+          selectedPrice = 1950;
+          areaInput.value = 1200;
+          areaInput.classList.remove('error');
+          areaError.classList.remove('visible');
+          resultPanel.classList.remove('visible');
+        });
+      })();
+
+      // ===== PACKAGE BUTTONS =====
+      document.querySelectorAll('.package-card .btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const pkgName = this.dataset.package || 'package';
+          alert('✨ ' + pkgName + ' package selected — Learn more about this plan.');
+        });
+      });
+
+      // ===== INIT =====
+      buildClientCarousel();
+      buildShowcase();
+      console.log('🏗️ BigLand Construction · Leadership section removed ✅');
+      console.log('🎬 Motion site with lazy loading enabled ✅');
+
     })();
   </script>
 </body>
