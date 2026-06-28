@@ -3,22 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Bigland · Premium Builders</title>
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#b8953a" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Bigland" />
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-    <!-- Google Fonts -->
+    <title>Bigland Construction — Premium Builders</title>
+    <meta name="description" content="Bigland Construction offers premium home construction services with a 10-year warranty. Build your dream home with us." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* ============================================================
@@ -132,7 +121,7 @@
         }
 
         /* ============================================================
-           HEADER
+           HEADER — with Logo Image
            ============================================================ */
         .site-header {
             position: fixed;
@@ -163,17 +152,11 @@
             text-decoration: none;
             flex-shrink: 0;
         }
-        .brand .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--color-accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 800;
-            font-size: 15px;
+        .brand .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+            border-radius: 6px;
         }
         .brand .logo-text {
             font-size: 20px;
@@ -495,6 +478,9 @@
             .brand .logo-text {
                 font-size: 17px;
             }
+            .brand .logo-img {
+                height: 34px;
+            }
             .modal-content {
                 padding: 28px 20px 20px;
             }
@@ -523,10 +509,8 @@
             body {
                 padding-top: 64px;
             }
-            .brand .logo-icon {
-                width: 30px;
+            .brand .logo-img {
                 height: 30px;
-                font-size: 12px;
             }
             .brand .logo-text {
                 font-size: 15px;
@@ -2790,7 +2774,7 @@
     <header class="site-header" id="mainHeader" role="banner">
         <div class="header-container">
             <a href="#" class="brand" aria-label="Bigland Construction Home">
-                <span class="logo-icon"><i class="fas fa-crown"></i></span>
+                <img src="https://res.cloudinary.com/dpvpnwhm4/image/upload/v1782292250/logo_b_vk7fin.png" alt="Bigland Construction Logo" class="logo-img" />
                 <span class="logo-text">Bigland<span>Construction</span></span>
             </a>
             <ul class="nav-menu" id="navMenu">
@@ -4334,7 +4318,7 @@
             // ===== INIT =====
             buildClientCarousel();
             buildShowcase();
-            console.log('🏗️ Bigland Construction · About section image replaced with form ✅');
+            console.log('🏗️ Bigland Construction · Logo added to header ✅');
 
         })();
     </script>
